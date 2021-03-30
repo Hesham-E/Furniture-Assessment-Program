@@ -1,0 +1,91 @@
+ENSF 409 Proposed outline
+*JVanderstoop*
+
+program flow: 
+		- output guidlines through the terminal for useage of the program, 
+			such as allowed inputs, and how to access the outputs 
+
+		- intake user input through terminal in the provided form
+
+		- manipulate the input (regex probably) into strings for each search 
+			parameter of the desired furniture
+			- quantity to int
+
+		- access the database 
+
+		- use the type and category to build an object specified by the user 
+			- see examples of every type of furniture in inventory.sql, 
+				we can build objects using the TABLES and have data 
+				that match each table
+	
+		- compare the possible combination in which every boolean for the required object 
+			has turned true, and compare the prices.
+	
+		- once there cannot be a lowest price, return the needed values for the newly made piece 
+			to be displayed, and format the output file.
+
+		- if no possible combination is present, display the error messages and the manufacturers
+			of new furniture required
+		
+		- delete the objects 'bought' (if any) from the database, then close the database 
+	
+
+		- end the program 
+
+
+Possible classes/methods:
+		
+		- File I/O class
+			- contains the main method (handles IO exceptions)
+				- prompts for user input
+				- sends the user input to the proper strings/ints
+				- creates the Furniture class object 
+				- sends for the DataBase class to begin (which opens the calculator(which opens FormattedForm and UpdateDataBase))
+				- if DataBase and calculator are not successful, prints error messages to the terminal  
+
+		- Furniture class 
+			- contains private classes for each TABLE currently present in the database
+				- strings, booleans as data members
+				- getters, setters constructors
+			- gives the user input furniture type to DataBase 
+			- gives an object of user input furniture type to Calculator Class
+
+
+		- DataBase class
+			- opens database
+			- accessed in the File I/0 class and allows for searching each possible row of the table using the given 
+				user input furniture type 
+			- constructs a 2d array of strings as ID, booleans,  and price to send back to the Furniture class
+				each row is one peice of furniture that matches the user input type. 
+			- passes this array into Calculator class 
+			- can be used to access manufacturer details if needed from Calculator
+			- closes database
+
+		- Calculator class 
+			- uses the 2d array and some clever parsing to find different combinations of the given object type
+			- compares the resulting price of each combination
+			- sends the ID numbers of used furniture back to the UpdateDataBase class for deleting from the table
+			- if any part of the new object isnt satisfied, ie. there was no combination, gives the manufacturer 
+				ID back to the DataBase class for error and manufacturer output 
+			- otherwise uses the FormattedForm to output the product. 
+		
+		- UpdateDataBase class
+			- opens database 
+			- receives the ID numbers of used furniture and deletes it from the database 
+			- closes database
+
+		- FormattedForm class
+			- gets the user input type, quantity, ID numbers deleted from the database, and total price
+			- opens the output stream
+			- builds everything to the specifications provided in orderform.txt
+			- sends to the output file, which will have to be hardcoded (no command line args)
+			- closes the output stream
+
+
+
+
+
+
+
+		
+			
