@@ -1,6 +1,5 @@
-
 public class Furniture {
-
+    
     public String category; 
     public Chair chair = null; 
     public Desk desk = null;
@@ -65,8 +64,9 @@ public class Furniture {
         }
         if (this.category == "filing")
         {
-            return (this.filing.cabinet && this.filing.drawers && this.filing.rails) true : false; 
+            return (this.filing.cabinet && this.filing.drawers && this.filing.rails)? true : false; 
         }
+        return false;
     }
 
     public String getID()

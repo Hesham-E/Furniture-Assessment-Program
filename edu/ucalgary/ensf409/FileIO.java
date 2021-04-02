@@ -29,7 +29,7 @@ public class FileIO {
             return order;
         }
 
-        public void FormattedFormOutput(Furniture[] filledOrder, String[] clientOrder)
+        public void FormattedFormOutput(Furniture[] filledOrder, String[] clientOrder) throws IOException
         {
             boolean orderFilled = true; 
             for (int i=0; i < filledOrder.length; i++)
@@ -38,7 +38,7 @@ public class FileIO {
             }
             if (orderFilled)
             {
-                FileWriter fw = FileWriter(this.outputFile, true);
+                FileWriter fw = new FileWriter(this.outputFile, true);
                 try( BufferedWriter writer = new BufferedWriter(fw)){
                     writer.write("Furniture Order Form\n\nFaculty Name:\nContact:\nDate\n\nOrigional Request: " 
                                     + clientOrder[0] + " " + clientOrder[1] + ", " 

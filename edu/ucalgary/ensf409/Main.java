@@ -1,9 +1,8 @@
 import java.io.IOException;
-import edu.ucalgary.ensf409.*; 
 
 public class Main {
 
-    public static void main(String [] args)
+    public static void main(String [] args) throws IOException
     {
         FileIO inputOutput = new FileIO();
         String [] clientOrder = new String[3];

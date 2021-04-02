@@ -1,5 +1,4 @@
 import java.sql.*;
-import edu.ucalgary.ensf409.Furniture; 
 public class Database {
 
     public final String DBURL;
