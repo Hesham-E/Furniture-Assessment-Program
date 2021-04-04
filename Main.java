@@ -1,28 +1,43 @@
-import java.io.IOException;
-import edu.ucalgary.ensf409.*; 
+package edu.ucalgary.ensf409;
 
+import java.io.IOException;
+import edu.ucalgary.ensf409.*;
+/**
+ * Main.java for ENSF409 final project W2021
+ * Written by Josh Vanderstoop 
+ * contains only main method, returns nothing. 
+ */
+
+/**
+ * to run the program: NOT FINISHED
+ */
 
 public class Main {
 
+    /**
+     * main method
+     * creates and uses objects from the FileIO and Calculator
+     * classes. 
+     */
     public static void main(String [] args)
     {
         FileIO inputOutput = new FileIO();
         String [] clientOrder = new String[3];
         try 
         { 
+            // see FileIO documentation
             clientOrder = inputOutput.inputFetching();
         }
         catch (IOException e)
         {
+            // if the exeption is thrown and the inputs are not correct 
+            System.out.println("One of your inputs was not correct, please restart the application and try again.");
             e.printStackTrace();
         }
+        /* creating the calculator object, which by the constructor also generates
+         the database the calculator will pull information from */
         Calculator calculating = new Calculator(clientOrder); 
-        calculating.priceCalculator();
-        inputOutput.FormattedFormOutput(calculating, clientOrder);
-
-        
-        
+        calculating.priceCalculator(); // see Calculator documentation 
+        inputOutput.formattedFormOutput(calculating, clientOrder); // see FileIO documentation
     }
-
-
 }

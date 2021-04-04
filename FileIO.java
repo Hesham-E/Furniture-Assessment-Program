@@ -1,11 +1,27 @@
+package edu.ucalgary.ensf409;
+
 import java.io.*;
 import java.util.Arrays; 
 
+/**
+ * Calculator.java for ENSF409 final project W2021
+ * Written by Josh Vanderstoop 
+ * contains two methods:
+ *      inputFetching       - begins the program and prompts the user for inputs 
+ *      FormattedFormOutput - decides if the request has been filled
+ *                              if true, send to the output file in the format 
+ *                              if false, display failure message to the terminal
+ */
 public class FileIO {
 
-        private File outputFile = new File("OrderForm.txt"); 
-
-
+        /**
+         * inputFetching method
+         * prints instructions and examples to the terminal
+         * generates a String[] for the user input from the termnial
+         * prints more information and instructions
+         * @return String[] of user input, contains type, category and quantity
+         * @throws IOException
+         */
         public String[] inputFetching() throws IOException
         {
             System.out.println();
@@ -36,18 +52,28 @@ public class FileIO {
             return order;
         }
 
-        public void FormattedFormOutput(Calculator calc, String[] clientOrder)
+
+        /**
+         * formattedFormOutput method
+         * 
+         * @param calc contains the whole Calculator object created in main to grant easy access to datamembers
+         * @param clientOrder String[] of user input, contains type, category and quantity
+         */
+        public void formattedFormOutput(Calculator calc, String[] clientOrder)
         {
-            boolean orderFilled = true; 
-            for (int i=0; i < calc.lowestPrice.length; i++)
-            {
-               orderFilled = (!calc.lowestPrice[i].isFilled())? false : true;
-            }
+            boolean orderFilled = false; // assume the order has not been filled
+            
+            // NOTE: this block of the method is unfinished, and will be decided shortly after the
+            //         Calculator.priceCalculator method has been finished
+
             if (orderFilled)
             {
-                try( FileWriter fw = new FileWriter(this.outputFile, true))
+                try
                 {
+                    FileWriter fw = new FileWriter("OrderForm.txt", true); // create the file in the working directory
                     BufferedWriter writer = new BufferedWriter(fw);
+                    // general formatting subject to change however seen fit, this simply follows the example provided 
+                    // in the project handout
                     writer.write("Furniture Order Form\n\nFaculty Name:\nContact:\nDate\n\nOrigional Request: " 
                                     + clientOrder[0] + " " + clientOrder[1] + ", " 
                                             + clientOrder[2] + "\n\nItems Ordered\n" );
@@ -66,6 +92,7 @@ public class FileIO {
                 {
                     e.printStackTrace();
                 }
+                // once the order has been confirmed and outputted, the used furniture peices must be deleted form the database
                 for (int i = 0; i < calc.lowestPrice.length; i++)
                 {
                     calc.removeFurniture(calc.lowestPrice[i].category, calc.lowestPrice[i].getID());
@@ -73,17 +100,23 @@ public class FileIO {
             }
             else
             {
+                // if the order cannot be filled, the following will be printed to the terminal
                 System.out.println("Sadly, we are unable to fill your request at this time, given our limited inventory.");
                 System.out.println("Below, you may find a list of manufacturers that make your requested furniture item:");
                 String manuID = "";
-                for (int i=0; i < calc.inInventory.length; i++)
+                /* this creates a String[] that contains the manufacturers of the peices of furniture 
+                    in the database under the specified table and type */ 
+                int i = 0;
+                while (calc.inInventory[i] != null)
                 {
-                    if (!manuID.contains(calc.inInventory[i].getManuID()))
+                    if (!manuID.contains(calc.inInventory[i].getManuID())) //ensures there are no duplicates
                     {
-                        manuID = manuID + calc.inInventory[i].getManuID(); 
+                        manuID = manuID + calc.inInventory[i].getManuID() + " "; 
                     }
+                    i++;
                 }
-                calc.printManufacturers(manuID);
-            }
+                String [] manuIDSplit = manuID.split("\\s"); // splits the string into the "words" for the completed array
+                calc.printManufacturers(manuIDSplit); // calls for the manufacturers to be printed to the termninal
+            } 
         }
 }
