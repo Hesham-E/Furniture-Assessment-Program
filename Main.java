@@ -1,10 +1,11 @@
 package edu.ucalgary.ensf409;
 
 import java.io.IOException;
-import edu.ucalgary.ensf409.*;
 /**
  * Main.java for ENSF409 final project W2021
- * Written by Josh Vanderstoop 
+ * @author Josh Vanderstoop <a href="mailto:joshua.vanderstoop@ucalgary.ca">joshua.vanderstoop@ucalgary.ca</a>
+ * @version 1.2
+ * @since 1.0
  * contains only main method, returns nothing. 
  */
 

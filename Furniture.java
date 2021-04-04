@@ -3,7 +3,9 @@ package edu.ucalgary.ensf409;
 
 /**
  * Furnitue.java for ENSF409 Final Project 
- * Written by Josh Vanderstoop 
+ * @author Josh Vanderstoop <a href="mailto:joshua.vanderstoop@ucalgary.ca">joshua.vanderstoop@ucalgary.ca</a>
+ * @version 1.0
+ * @since 1.0
  * Furniture is used in the Calculator and Database classes in the form of Furniture arrays 
  *  this class also contains 4 private subclasses, each of which is a member of the Furniture class
  */
@@ -170,6 +172,8 @@ public class Furniture {
 
     /**
      * Private subclasses 
+     * all of the datamembers in these classes are designed to emulate the exact objects found
+     * in each respective table. 
      */
 
      /**
@@ -209,7 +213,7 @@ public class Furniture {
             this.top = top; 
             this.drawer = drawer; 
         }
-    }
+    } // end of subclass declaration
 
     /**
       * subclass Lamp 
@@ -246,7 +250,7 @@ public class Furniture {
             this.bulb = bulb; 
         }
         
-    }
+    } // end of subclass declaration
 
     /**
       * subclass Chair
@@ -288,7 +292,7 @@ public class Furniture {
             this.seat = seat; 
             this.cushion = cushion;  
         }
-    }
+    } // end of subclass declaration
 
     /**
       * subclass Filing
@@ -329,5 +333,5 @@ public class Furniture {
             this.cabinet = cabinet; 
         }
 
-    }
-}
+    }   // end of subclass declaration
+}   // end of class declaration
