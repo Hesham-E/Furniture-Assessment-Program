@@ -1,5 +1,6 @@
-import java.io.*;
+package edu.ucalgary.ensf409;
 
+import java.io.*;
 /**
  * Calculator.java for ENSF409 final project W2021
  * @author Josh Vanderstoop <a href="mailto:joshua.vanderstoop@ucalgary.ca">joshua.vanderstoop@ucalgary.ca</a>
@@ -25,14 +26,14 @@ public class FileIO {
         {
             System.out.println();
             System.out.println();
-            System.out.println("    Hello, welcome to the Supply Chain Management (SCM) application");
-            System.out.println("    To begin the program, please enter your order request in the following format:");
-            System.out.println("             Furniture type Furniture Category, quantity");
-            System.out.println("    eg:      Executive chair, 1       or        Standing desk, 3");
+            System.out.println("Hello, welcome to the Supply Chain Management (SCM) application");
+            System.out.println("To begin the program, please enter your order request in the following format:");
+            System.out.println("         Furniture type Furniture Category, quantity");
+            System.out.println("eg:      Executive chair, 1       or        Standing desk, 3");
             System.out.println();
-            System.out.println("    Please ensure that the format is followed strictly in the specified order, otherwise"); 
-            System.out.println("    your request may not be processed correctly. When you are satisfied with your input,");
-            System.out.println("    please press enter.");
+            System.out.println("Please ensure that the format is followed strictly in the specified order, to ensure"); 
+            System.out.println("that your request is processed correctly. When you are satisfied with your input,");
+            System.out.println("please press enter.");
             System.out.println();
             System.out.println();
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)); 
@@ -61,9 +62,7 @@ public class FileIO {
         public void formattedFormOutput(Calculator calc, String[] clientOrder)
         {
             boolean orderFilled = false; // assume the order has not been filled
-            
-            // NOTE: this block of the method is unfinished, and will be decided shortly after the
-            //         Calculator.priceCalculator method has been finished
+            orderFilled = calc.priceCalculator();
 
             if (orderFilled)
             {
@@ -105,17 +104,23 @@ public class FileIO {
                 String manuID = "";
                 /* this creates a String[] that contains the manufacturers of the peices of furniture 
                     in the database under the specified table and type */ 
-                int i = 0;
-                while (calc.inInventory[i] != null)
-                {
-                    if (!manuID.contains(calc.inInventory[i].getManuID())) //ensures there are no duplicates
-                    {
-                        manuID = manuID + calc.inInventory[i].getManuID() + " "; 
+                    for(int i = 0; i<calc.inInventory.length;i++){
+                        if (!manuID.contains(calc.inInventory[i].getManuID())) //ensures there are no duplicates
+                        {
+                            manuID = manuID + calc.inInventory[i].getManuID() + " "; 
+                        }
                     }
-                    i++;
-                }
+                // int i = 0;
+                // while (calc.inInventory[i] != null)
+                // {
+                //     if (!manuID.contains(calc.inInventory[i].getManuID())) //ensures there are no duplicates
+                //     {
+                //         manuID = manuID + calc.inInventory[i].getManuID() + " "; 
+                //     }
+                //     i++;
+                // }
                 String [] manuIDSplit = manuID.split("\\s"); // splits the string into the "words" for the completed array
                 calc.printManufacturers(manuIDSplit); // calls for the manufacturers to be printed to the termninal
             } 
         }
-} //end of class declaration
+}

@@ -1,3 +1,5 @@
+package edu.ucalgary.ensf409;
+
 import java.io.IOException;
 /**
  * Main.java for ENSF409 final project W2021
@@ -31,12 +33,12 @@ public class Main {
         {
             // if the exeption is thrown and the inputs are not correct 
             System.out.println("One of your inputs was not correct, please restart the application and try again.");
-            e.printStackTrace();
+            System.exit(0); 
         }
         /* creating the calculator object, which by the constructor also generates
          the database the calculator will pull information from */
         Calculator calculating = new Calculator(clientOrder); 
-        calculating.priceCalculator(); // see Calculator documentation 
+        // System.out.println(calculating.priceCalculator());// see Calculator documentation
         inputOutput.formattedFormOutput(calculating, clientOrder); // see FileIO documentation
     }
-} // end of class declaration 
+}
