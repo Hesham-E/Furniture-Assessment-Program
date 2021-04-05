@@ -7,7 +7,7 @@ package edu.ucalgary.ensf409;
  * Furniture is used in the Calculator and Database classes in the form of Furniture arrays 
  *  this class also contains 4 private subclasses, each of which is a member of the Furniture class
  */
-public class Furniture {
+public class Furniture implements Comparable<Furniture>{
 
     /**
      * Data Members: 
@@ -56,6 +56,10 @@ public class Furniture {
             this.filing = new Filing(ID, type, b1, b2, b3, price, manuID);
         }
     }
+    @Override
+    public int compareTo(Furniture compareFurn){
+        return Integer.compare(getPrice(), compareFurn.getPrice());
+    }
 
     /**
      * Furniture overloaded constructor
@@ -69,19 +73,19 @@ public class Furniture {
         this.category = category; 
         if (this.category .equals("chair"))
         {
-            this.chair = new Chair("null", type, false, false, false, false, 0, "null");
+            this.chair = new Chair("null", type, false, false, false, false, -1, "null");
         }
         if (this.category .equals("desk"))
         {
-            this.desk = new Desk("null", type, false, false, false, 0, "null");
+            this.desk = new Desk("null", type, false, false, false, -1, "null");
         }
         if (this.category .equals("lamp"))
         {
-            this.lamp = new Lamp("null", type, false, false, 0, "null");
+            this.lamp = new Lamp("null", type, false, false, -1, "null");
         }
         if (this.category .equals("filing"))
         {
-            this.filing = new Filing("null", type, false, false, false, 0, "null");
+            this.filing = new Filing("null", type, false, false, false, -1, "null");
         }
     }
 
@@ -166,7 +170,66 @@ public class Furniture {
             return this.filing.price;
         return 0; 
     }
-
+    public String getType()
+    {
+        if (this.category.equals("chair")) 
+            return this.chair.type; 
+        if (this.category.equals("desk"))
+            return this.desk.type;
+        if (this.category.equals("lamp"))
+            return this.lamp.type; 
+        if (this.category.equals("filing"))
+            return this.filing.type;
+        return "not found"; 
+    }
+    public Boolean getBool(int index)
+    {
+        if(index == 0){
+            if (this.category.equals("chair")){
+                return chair.legs;
+            }
+            if (this.category.equals("desk")){
+                return desk.legs;
+            }
+            if (this.category.equals("lamp")){
+                return lamp.base;
+            }
+            if (this.category.equals("filing")){
+                return filing.drawers;
+            } 
+        }
+        if(index == 1){
+            if (this.category.equals("chair")){
+                return chair.arms;
+            }
+            if (this.category.equals("desk")){
+                return desk.top;
+            }
+            if (this.category.equals("lamp")){
+                return lamp.bulb;
+            }
+            if (this.category.equals("filing")){
+                return filing.rails;
+            } 
+        }
+        if(index == 2){
+            if (this.category.equals("chair")){
+                return chair.seat;
+            }
+            if (this.category.equals("desk")){
+                return desk.drawer;
+            }
+            if (this.category.equals("filing")){
+                return filing.cabinet;
+            } 
+        }
+        if(index == 3){
+            if (this.category.equals("chair")){
+                return chair.cushion;
+            } 
+        }
+        return false;
+    }
 
     /**
      * Private subclasses 
