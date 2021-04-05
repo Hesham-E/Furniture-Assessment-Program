@@ -115,7 +115,7 @@ public class Database {
     {
         // PreparedStatement statement;
         String queryCategory = Category.toUpperCase();
-        String query = "DELETE FROM " + queryCategory + " WHERE ID = ?";
+        // String query = "DELETE FROM " + queryCategory + " WHERE ID = ?";
         try {
             // statement = connect.prepareStatement(query);
             // statement.setString(1, ID);
