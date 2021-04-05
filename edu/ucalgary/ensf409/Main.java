@@ -1,7 +1,6 @@
 package edu.ucalgary.ensf409;
 
 import java.io.IOException;
-import edu.ucalgary.ensf409.*;
 /**
  * Main.java for ENSF409 final project W2021
  * Written by Josh Vanderstoop 

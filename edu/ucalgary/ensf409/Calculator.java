@@ -146,6 +146,9 @@ public class Calculator extends Database {
             if(possibleCombinations.size() == 0){
                 return false;
             }
+            else if(possibleCombinations.size() < fillOrder.length){
+                return false;
+            }
             else{
                 calculatePricesTotal();
                 for(int i = 0; i<fillOrder.length;i++){
