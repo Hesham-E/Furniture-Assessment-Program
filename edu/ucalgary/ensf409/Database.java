@@ -1,5 +1,5 @@
 package edu.ucalgary.ensf409;
-
+import java.util.ArrayList;
 import java.sql.*; 
  
 
@@ -64,46 +64,43 @@ public class Database {
      */
     public Furniture[]  findUsedFurniture(String type, String category, int quantity)
     {
-        Statement statement; 
         ResultSet set; 
-        Furniture[] combinations = new Furniture[100]; 
-        String query = "SELECT * FROM inventory." + category + " WHERE type='" + type + "'";//follows SQL syntax and will select every item from the category table that has the specified type
+        ArrayList<Furniture> combinations = new ArrayList<Furniture>();
         try 
-        {
-            statement = connect.createStatement();
-            set = statement.executeQuery(query);
-            int i=0; // will be used to iterate through combinations to initialize its indecies
+        {   category = category.toLowerCase();
+            String queryCategory = category.toUpperCase();
+            String query = "SELECT * FROM " + queryCategory + " WHERE Type = ?";
+            PreparedStatement statement = connect.prepareStatement(query);
+            statement.setString(1, type);
+            set = statement.executeQuery();
             while (set.next())
-            {   // the category will decide which member of furniture to initialize, the other members are pulled from the table to build the furniture requested by the user
-                // some booleans are automatically set to false, since the category or type does not contain that number of members 
-                // lamp has 2 booleans but chair has 4
+            {
                 if (category.equals("chair"))
                 {
-                    combinations[i] = new Furniture(set.getString("type"), "chair", set.getString("ID"), set.getBoolean("Legs"), set.getBoolean("Arms"), set.getBoolean("Seat"), set.getBoolean("Cushion"), set.getInt("Price"), set.getString("ManuID"));
+                    combinations.add(new Furniture(set.getString("type"), "chair", set.getString("ID"), set.getBoolean("Legs"), set.getBoolean("Arms"), set.getBoolean("Seat"), set.getBoolean("Cushion"), set.getInt("Price"), set.getString("ManuID")));
                 }
                 else if (category.equals("desk") )
                 {
-                    combinations[i] = new Furniture(set.getString("type"), "desk", set.getString("ID"), set.getBoolean("Legs"), set.getBoolean("Top"), set.getBoolean("Drawer"), false, set.getInt("Price"), set.getString("ManuID"));
+                    combinations.add(new Furniture(set.getString("type"), "desk", set.getString("ID"), set.getBoolean("Legs"), set.getBoolean("Top"), set.getBoolean("Drawer"), false, set.getInt("Price"), set.getString("ManuID")));
                 }
                 else if (category.equals("filing") )
                 {
-                    combinations[i] = new Furniture(set.getString("type"), "filing", set.getString("ID"), set.getBoolean("Rails"), set.getBoolean("Drawers"), set.getBoolean("Cabinet"), false, set.getInt("Price"), set.getString("ManuID"));
+                    combinations.add(new Furniture(set.getString("type"), "filing", set.getString("ID"), set.getBoolean("Rails"), set.getBoolean("Drawers"), set.getBoolean("Cabinet"), false, set.getInt("Price"), set.getString("ManuID")));
                 }
                 else if (category.equals("lamp") )
                 {
-                    combinations[i] = new Furniture(set.getString("type"), "lamp", set.getString("ID"), set.getBoolean("Price"), set.getBoolean("Bulb"), false, false, set.getInt("Price"), set.getString("ManuID"));
+                    combinations.add(new Furniture(set.getString("type"), "lamp", set.getString("ID"), set.getBoolean("Price"), set.getBoolean("Bulb"), false, false, set.getInt("Price"), set.getString("ManuID")));
                 }
-                i++; 
             }
             statement.close();
             set.close();
         }
-        catch (SQLException e) // if type or category is not possible
+        catch (SQLException e) 
         {
             System.out.println("Names cannot be shown.");
             e.printStackTrace();
         }
-        return combinations;
+        return combinations.toArray(new Furniture[combinations.size()]);
     }
 
     /**
@@ -116,11 +113,16 @@ public class Database {
      */
     public void removeFurniture(String Category, String ID)
     {
-        Statement statement;
+        // PreparedStatement statement;
+        String queryCategory = Category.toUpperCase();
+        String query = "DELETE FROM " + queryCategory + " WHERE ID = ?";
         try {
-            statement = connect.createStatement();
-            statement.executeUpdate("DELETE FROM INVENTORY." + Category + " WHERE ID=" + ID); //SQL syntax to delete the member of category with the correct ID
-            statement.close();
+            // statement = connect.prepareStatement(query);
+            // statement.setString(1, ID);
+            // statement.execute();
+            Statement statment = connect.createStatement();
+            statment.execute("DELETE FROM " + queryCategory + " WHERE ID = " + "'" + ID + "'");
+            statment.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -135,14 +137,16 @@ public class Database {
      */
     public void printManufacturers(String [] manuID)
     {
-        Statement statement; 
+        // Statement statement; 
         ResultSet set;  
         for (int i=0; i < manuID.length; i++)
         {   //iteratively finds the manufacturer in SQL with the manuID = manuID[i]
-            String query = "SELECT * FROM inventory.manufacturer WHERE ManuID='" + manuID[i] + "'"; // follows SQL syntax, will get the info of every manufacturer 
+            // String query = "SELECT * FROM inventory.manufacturer WHERE ManuID='" + manuID[i] + "'"; // follows SQL syntax, will get the info of every manufacturer 
+            String query = "SELECT * FROM MANUFACTURER WHERE ManuID = " + manuID[i];
+            // PreparedStatement statement = connect.prepareStatement(query);
             try
             {
-                statement = connect.createStatement();
+                Statement statement = connect.createStatement();
                 set = statement.executeQuery(query);
                 while (set.next())
                 {   //prints a statement to the termnial that will list the manufacturer that has the manuID[i] 

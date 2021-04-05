@@ -65,6 +65,7 @@ public class FileIO {
             
             // NOTE: this block of the method is unfinished, and will be decided shortly after the
             //         Calculator.priceCalculator method has been finished
+            orderFilled = calc.priceCalculator();
 
             if (orderFilled)
             {
@@ -106,15 +107,21 @@ public class FileIO {
                 String manuID = "";
                 /* this creates a String[] that contains the manufacturers of the peices of furniture 
                     in the database under the specified table and type */ 
-                int i = 0;
-                while (calc.inInventory[i] != null)
-                {
-                    if (!manuID.contains(calc.inInventory[i].getManuID())) //ensures there are no duplicates
-                    {
-                        manuID = manuID + calc.inInventory[i].getManuID() + " "; 
+                    for(int i = 0; i<calc.inInventory.length;i++){
+                        if (!manuID.contains(calc.inInventory[i].getManuID())) //ensures there are no duplicates
+                        {
+                            manuID = manuID + calc.inInventory[i].getManuID() + " "; 
+                        }
                     }
-                    i++;
-                }
+                // int i = 0;
+                // while (calc.inInventory[i] != null)
+                // {
+                //     if (!manuID.contains(calc.inInventory[i].getManuID())) //ensures there are no duplicates
+                //     {
+                //         manuID = manuID + calc.inInventory[i].getManuID() + " "; 
+                //     }
+                //     i++;
+                // }
                 String [] manuIDSplit = manuID.split("\\s"); // splits the string into the "words" for the completed array
                 calc.printManufacturers(manuIDSplit); // calls for the manufacturers to be printed to the termninal
             } 
