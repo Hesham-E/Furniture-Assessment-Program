@@ -1,4 +1,4 @@
-package edu.ucalgary.ensf409; 
+
 
 /**
  * Calculator.java for ENSF409 final project W2021
@@ -40,7 +40,7 @@ public class Calculator extends Database {
      * initializes the length of fillOrder with the integer value from request[2]
      */
     public Calculator(String[] request) {
-        super("jdbc:mysql://localhost", "your_user", "your_password"); // ENSURE THIS IS SET UP FOR SUBMISSION 
+        super("jdbc:mysql://localhost", "youruser", "yourpass"); // ENSURE THIS IS SET UP FOR SUBMISSION 
         super.initializeConnection(); 
         int quantity=0;
         try {
@@ -71,4 +71,4 @@ public class Calculator extends Database {
         // included from debugging on April 3rd 20201 
         this.lowestPrice[0] = new Furniture("mesh", "chair");
     }
-}
+} // end of class declaration 

@@ -1,5 +1,3 @@
-package edu.ucalgary.ensf409;
-
 import java.io.*;
 
 /**
@@ -27,14 +25,14 @@ public class FileIO {
         {
             System.out.println();
             System.out.println();
-            System.out.println("Hello, welcome to the Supply Chain Management (SCM) application");
-            System.out.println("To begin the program, please enter your order request in the following format:");
-            System.out.println("         Furniture type Furniture Category, quantity");
-            System.out.println("eg:      Executive chair, 1       or        Standing desk, 3");
+            System.out.println("    Hello, welcome to the Supply Chain Management (SCM) application");
+            System.out.println("    To begin the program, please enter your order request in the following format:");
+            System.out.println("             Furniture type Furniture Category, quantity");
+            System.out.println("    eg:      Executive chair, 1       or        Standing desk, 3");
             System.out.println();
-            System.out.println("Please ensure that the format is followed strictly in the specified order, to ensure"); 
-            System.out.println("that your request is processed correctly. When you are satisfied with your input,");
-            System.out.println("please press enter.");
+            System.out.println("    Please ensure that the format is followed strictly in the specified order, otherwise"); 
+            System.out.println("    your request may not be processed correctly. When you are satisfied with your input,");
+            System.out.println("    please press enter.");
             System.out.println();
             System.out.println();
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)); 

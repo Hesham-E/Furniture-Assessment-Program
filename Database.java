@@ -1,5 +1,3 @@
-package edu.ucalgary.ensf409;
-
 import java.sql.*; 
  
 
@@ -22,7 +20,7 @@ public class Database {
     public final String DBURL;
     public final String USERNAME; 
     public final String PASSWORD; 
-    private Connection connect; 
+    public Connection connect; 
 
     /**
      * Database constructor 
@@ -52,8 +50,8 @@ public class Database {
             connect = DriverManager.getConnection(this.DBURL, this.USERNAME, this.PASSWORD);
         } catch (SQLException e) 
         {
-            System.out.println("Connection failed");
-            e.printStackTrace();
+            System.out.println("Connection failed, please try again");
+            System.exit(0);
         }
     }
 
@@ -102,8 +100,8 @@ public class Database {
         }
         catch (SQLException e) // if type or category is not possible
         {
-            System.out.println("Names cannot be shown.");
-            e.printStackTrace();
+            System.out.println("      *********       USER INPUT ERROR       *********");
+            System.out.println("    please restart the application and review your input");
         }
         return combinations;
     }
@@ -155,7 +153,6 @@ public class Database {
             } catch (SQLException e) // if that manufacturer no longer exists in the database, do the following
             {
                 System.out.println("The manufacuturer listed under: " + manuID[i] + " is no longer a supplier to the Univeristy of Calgary");
-                e.printStackTrace();
             }
             System.out.println();
             System.out.println();

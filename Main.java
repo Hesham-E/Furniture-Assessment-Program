@@ -1,5 +1,3 @@
-package edu.ucalgary.ensf409;
-
 import java.io.IOException;
 /**
  * Main.java for ENSF409 final project W2021
@@ -41,4 +39,4 @@ public class Main {
         calculating.priceCalculator(); // see Calculator documentation 
         inputOutput.formattedFormOutput(calculating, clientOrder); // see FileIO documentation
     }
-}
+} // end of class declaration 

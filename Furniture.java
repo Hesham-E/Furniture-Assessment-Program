@@ -1,6 +1,3 @@
-package edu.ucalgary.ensf409; 
-
-
 /**
  * Furnitue.java for ENSF409 Final Project 
  * @author Josh Vanderstoop <a href="mailto:joshua.vanderstoop@ucalgary.ca">joshua.vanderstoop@ucalgary.ca</a>
