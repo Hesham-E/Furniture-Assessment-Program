@@ -71,19 +71,19 @@ public class Furniture implements Comparable<Furniture>{
     public Furniture(String type, String category)
     {
         this.category = category; 
-        if (this.category .equals("chair"))
+        if (this.category.equals("chair"))
         {
             this.chair = new Chair("null", type, false, false, false, false, -1, "null");
         }
-        if (this.category .equals("desk"))
+        if (this.category.equals("desk"))
         {
             this.desk = new Desk("null", type, false, false, false, -1, "null");
         }
-        if (this.category .equals("lamp"))
+        if (this.category.equals("lamp"))
         {
             this.lamp = new Lamp("null", type, false, false, -1, "null");
         }
-        if (this.category .equals("filing"))
+        if (this.category.equals("filing"))
         {
             this.filing = new Filing("null", type, false, false, false, -1, "null");
         }
