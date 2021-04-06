@@ -98,19 +98,19 @@ public class Furniture implements Comparable<Furniture>{
     public boolean isFilled ()
     {
         // Note: the '?' operator determins if the () expression is true, and picks the first option. otherwise chooses the second option
-        if (this.category .equals("chair"))
+        if (this.category.equals("chair"))
         {
             return (this.chair.legs && this.chair.arms && this.chair.seat && this.chair.cushion)? true : false;    
         }
-        if (this.category .equals("desk"))
+        if (this.category.equals("desk"))
         {
             return (this.desk.legs && this.desk.drawer && this.desk.top)? true : false; 
         }
-        if (this.category .equals("lamp"))
+        if (this.category.equals("lamp"))
         {
             return (this.lamp.base && this.lamp.bulb)? true : false; 
         }
-        if (this.category .equals("filing"))
+        if (this.category.equals("filing"))
         {
             return (this.filing.cabinet && this.filing.drawers && this.filing.rails)? true : false; 
         }
