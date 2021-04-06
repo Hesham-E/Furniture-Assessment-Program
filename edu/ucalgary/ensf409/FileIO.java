@@ -1,7 +1,6 @@
 package edu.ucalgary.ensf409;
 
 import java.io.*;
-import java.util.Arrays; 
 
 /**
  * Calculator.java for ENSF409 final project W2021
@@ -71,7 +70,7 @@ public class FileIO {
             {
                 try
                 {
-                    FileWriter fw = new FileWriter("OrderForm.txt", true); // create the file in the working directory
+                    FileWriter fw = new FileWriter("OrderForm.txt", false); // create the file in the working directory
                     BufferedWriter writer = new BufferedWriter(fw);
                     // general formatting subject to change however seen fit, this simply follows the example provided 
                     // in the project handout
