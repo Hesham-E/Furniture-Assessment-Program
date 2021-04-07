@@ -4,7 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 /**
  * Calculator.java for ENSF409 final project W2021
- * Written by Josh Vanderstoop 
+ * @author Josh Vanderstoop <a href="mailto:joshua.vanderstoop@ucalgary.ca">joshua.vanderstoop@ucalgary.ca</a>
+ * @author Faisal Hossain <a href="mailto:faisal.hossain1@ucalgary.ca">faisal.hossain1@ucalgary.ca</a>
+ * @version 1.4
+ * @since 1.0
  * contains several methods to obtain information from the database
  * and calculate the cheapest option for the clients request.
  * these methods make use of the furniture class and extension of the Database class
@@ -35,7 +38,7 @@ public class Calculator extends Database {
     public int[] sortedArray;
     public List<Furniture[]> possibleCombinations = new ArrayList<Furniture[]>();
     public Calculator(String[] request) {
-        super("jdbc:mysql://localhost/INVENTORY", "root", "1234"); // ENSURE THIS IS SET UP FOR SUBMISSION 
+        super("jdbc:mysql://localhost/INVENTORY", "Ryuiko", "Hanatan44735137"); // ENSURE THIS IS SET UP FOR SUBMISSION 
         super.initializeConnection(); 
         int quantity=0;
         try {
@@ -44,7 +47,7 @@ public class Calculator extends Database {
         catch (NumberFormatException e)
         {
             // if the user asks for a non integer number of furniture pieces 
-            System.out.println("Sorry, the quanitty you have requested is not a real number.");
+            System.out.println("Sorry, the quanity you have requested is not a real number.");
             System.exit(0);
         }
         this.inInventory = super.findUsedFurniture(request[0], request[1], quantity);

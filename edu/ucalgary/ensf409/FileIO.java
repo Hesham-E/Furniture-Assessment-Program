@@ -3,7 +3,10 @@ package edu.ucalgary.ensf409;
 import java.io.*;
 /**
  * Calculator.java for ENSF409 final project W2021
- * Written by Josh Vanderstoop 
+ * @author Josh Vanderstoop <a href="mailto:joshua.vanderstoop@ucalgary.ca">joshua.vanderstoop@ucalgary.ca</a>
+ * @author Faisal Hossain <a href="mailto:faisal.hossain1@ucalgary.ca">faisal.hossain1@ucalgary.ca</a>
+ * @version 1.3
+ * @since 1.0
  * contains two methods:
  *      inputFetching       - begins the program and prompts the user for inputs 
  *      FormattedFormOutput - decides if the request has been filled
