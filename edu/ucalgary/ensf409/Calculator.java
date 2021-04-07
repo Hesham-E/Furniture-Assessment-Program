@@ -103,7 +103,7 @@ public class Calculator extends Database {
                 for(int i = 0; i<fillOrder.length;i++){
                     insertItems(sortedArray[i], i);
                 }
-                combinationstoLowestPrice();
+                combinationsToLowestPrice();
                 return true;
             }
         }
@@ -154,7 +154,7 @@ public class Calculator extends Database {
                 for(int i = 0; i<fillOrder.length;i++){
                     insertItems(sortedArray[i], i);
                 }
-                combinationstoLowestPrice();
+                combinationsToLowestPrice();
                 return true;
             }
         }
@@ -195,7 +195,7 @@ public class Calculator extends Database {
                 for(int i = 0; i<fillOrder.length;i++){
                     insertItems(sortedArray[i], i);
                 }
-                combinationstoLowestPrice();
+                combinationsToLowestPrice();
                 return true;
             }
 
@@ -304,7 +304,7 @@ public class Calculator extends Database {
             }
         }
     }
-    public void combinationstoLowestPrice(){
+    public void combinationsToLowestPrice(){
         ArrayList<Furniture> lowestprice = new ArrayList<Furniture>();
         for(int i = 0; i<fillOrder.length; i++){
             for(int j = 0; j<4;j++){
