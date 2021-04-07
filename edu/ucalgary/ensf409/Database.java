@@ -164,6 +164,9 @@ public class Database {
         }
     }
 
-
+    public Connection getConnect ()
+    {
+        return this.connect;
+    }
     
 }

@@ -69,7 +69,7 @@ public class FileIO {
             {
                 try
                 {
-                    FileWriter fw = new FileWriter("OrderForm.txt", true); // create the file in the working directory
+                    FileWriter fw = new FileWriter("OrderForm.txt", false); // create the file in the working directory
                     BufferedWriter writer = new BufferedWriter(fw);
                     // general formatting subject to change however seen fit, this simply follows the example provided 
                     // in the project handout

@@ -35,7 +35,7 @@ public class Calculator extends Database {
     public int[] sortedArray;
     public List<Furniture[]> possibleCombinations = new ArrayList<Furniture[]>();
     public Calculator(String[] request) {
-        super("jdbc:mysql://localhost/INVENTORY", "Username", "Password"); // ENSURE THIS IS SET UP FOR SUBMISSION 
+        super("jdbc:mysql://localhost/INVENTORY", "root", "1234"); // ENSURE THIS IS SET UP FOR SUBMISSION 
         super.initializeConnection(); 
         int quantity=0;
         try {
