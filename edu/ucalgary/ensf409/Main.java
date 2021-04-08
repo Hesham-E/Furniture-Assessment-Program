@@ -10,7 +10,11 @@ import java.io.IOException;
  */
 
 /**
- * to run the program: NOT FINISHED
+ * to run the program:
+ * Compile the program by entering this to your terminal (if you are on linux, replace ; with :)
+ * javac -cp .;mysql-connector-java-8.0.23.jar;. ./edu/ucalgary/ensf409/Main.java
+ * Run the program by entering this to your terminal
+ * java -cp .;mysql-connector-java-8.0.23.jar;. edu.ucalgary.ensf409.Main
  */
 
 public class Main {
