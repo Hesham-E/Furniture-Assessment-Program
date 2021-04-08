@@ -6,6 +6,7 @@ import java.sql.*;
 /**
  * Database.java for ENSF409 Final Project W2021
  * @author Josh Vanderstoop <a href="mailto:joshua.vanderstoop@ucalgary.ca">joshua.vanderstoop@ucalgary.ca</a>
+ * @author Faisal Hossain <a href="mailto:faisal.hossain1@ucalgary.ca">faisal.hossain1@ucalgary.ca</a>
  * @version 1.4
  * @since 1.0
  * contains methods which connect to the specified database
@@ -164,7 +165,7 @@ public class Database {
             System.out.println();
             System.out.println();
         }
-    }
+    } // end of class declaration
 
     public Connection getConnect ()
     {

@@ -4,8 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 /**
  * Calculator.java for ENSF409 final project W2021
- * @author RYUIKO MADE THIS <a href="mailto:joshua.vanderstoop@ucalgary.ca">joshua.vanderstoop@ucalgary.ca</a>
- * @version 1.2
+ * @author Josh Vanderstoop <a href="mailto:joshua.vanderstoop@ucalgary.ca">joshua.vanderstoop@ucalgary.ca</a>
+ * @author Faisal Hossain <a href="mailto:faisal.hossain1@ucalgary.ca">faisal.hossain1@ucalgary.ca</a>
+ * @version 1.4
  * @since 1.0
  * contains several methods to obtain information from the database
  * and calculate the cheapest option for the clients request.
@@ -37,7 +38,7 @@ public class Calculator extends Database {
     public int[] sortedArray;
     public List<Furniture[]> possibleCombinations = new ArrayList<Furniture[]>();
     public Calculator(String[] request) {
-        super("jdbc:mysql://localhost/INVENTORY", "root", "1234"); // ENSURE THIS IS SET UP FOR SUBMISSION 
+        super("jdbc:mysql://localhost/INVENTORY", "Ryuiko", "Hanatan44735137"); // ENSURE THIS IS SET UP FOR SUBMISSION 
         super.initializeConnection(); 
         int quantity=0;
         try {
@@ -46,7 +47,7 @@ public class Calculator extends Database {
         catch (NumberFormatException e)
         {
             // if the user asks for a non integer number of furniture pieces 
-            System.out.println("Sorry, the quanitty you have requested is not a real number.");
+            System.out.println("Sorry, the quanity you have requested is not a real number.");
             System.exit(0);
         }
         this.inInventory = super.findUsedFurniture(request[0], request[1], quantity);
@@ -83,14 +84,14 @@ public class Calculator extends Database {
             for(int i = 0; i<inInventory.length;i++){
                 boolean[] boolArray = {inInventory[i].getBool(0), inInventory[i].getBool(1),inInventory[i].getBool(2),inInventory[i].getBool(3)};
                 if(ifFilled(boolArray)){
-                    addtoCombinations(inInventory[i], dummy, dummy, dummy);
+                    addToCombinations(inInventory[i], dummy, dummy, dummy);
                 }
                 for(int j = i+1; j<inInventory.length; j++){
                     boolean[] boolArray1 = {inInventory[i].getBool(0), inInventory[i].getBool(1),inInventory[i].getBool(2),inInventory[i].getBool(3)};
                     boolean[] boolArray2 = {inInventory[j].getBool(0), inInventory[j].getBool(1),inInventory[j].getBool(2),inInventory[j].getBool(3)};
                     boolean[] combinedBool = combineArray(boolArray1, boolArray2);
                     if(ifFilled(combinedBool)){
-                        addtoCombinations(inInventory[i], inInventory[j], dummy, dummy);
+                        addToCombinations(inInventory[i], inInventory[j], dummy, dummy);
                     }
                 }
             }
@@ -105,7 +106,7 @@ public class Calculator extends Database {
                 for(int i = 0; i<fillOrder.length;i++){
                     insertItems(sortedArray[i], i);
                 }
-                combinationstoLowestPrice();
+                combinationsToLowestPrice();
                 return true;
             }
         }
@@ -114,14 +115,14 @@ public class Calculator extends Database {
             for(int i = 0; i<inInventory.length;i++){
                 boolean[] boolArray = {inInventory[i].getBool(0), inInventory[i].getBool(1),inInventory[i].getBool(2),inInventory[i].getBool(3)};
                 if(ifFilled(boolArray)){
-                    addtoCombinations(inInventory[i], dummy, dummy, dummy);
+                    addToCombinations(inInventory[i], dummy, dummy, dummy);
                 }
                 for(int j = i+1; j<inInventory.length; j++){
                     boolean[] boolArray1 = {inInventory[i].getBool(0), inInventory[i].getBool(1),inInventory[i].getBool(2),inInventory[i].getBool(3)};
                     boolean[] boolArray2 = {inInventory[j].getBool(0), inInventory[j].getBool(1),inInventory[j].getBool(2),inInventory[j].getBool(3)};
                     boolean[] combinedBool = combineArray(boolArray1, boolArray2);
                     if(ifFilled(combinedBool)){
-                        addtoCombinations(inInventory[i], inInventory[j], dummy, dummy);
+                        addToCombinations(inInventory[i], inInventory[j], dummy, dummy);
                     }
                     for(int k = j+1; k<inInventory.length;k++){
                         boolean[] boolArray3 = {inInventory[i].getBool(0), inInventory[i].getBool(1),inInventory[i].getBool(2),inInventory[i].getBool(3)};
@@ -129,7 +130,7 @@ public class Calculator extends Database {
                         boolean[] boolArray5 = {inInventory[k].getBool(0), inInventory[k].getBool(1),inInventory[k].getBool(2),inInventory[k].getBool(3)};
                         boolean[] combinedArray2 = combineArray(boolArray3, boolArray4, boolArray5);
                         if(ifFilled(combinedArray2)){
-                            addtoCombinations(inInventory[i], inInventory[j], inInventory[k], dummy);
+                            addToCombinations(inInventory[i], inInventory[j], inInventory[k], dummy);
                         }
                         for(int l = k+1; l<inInventory.length;l++){
                             boolean[] boolArray6 = {inInventory[i].getBool(0), inInventory[i].getBool(1),inInventory[i].getBool(2),inInventory[i].getBool(3)};
@@ -138,7 +139,7 @@ public class Calculator extends Database {
                             boolean[] boolArray9 = {inInventory[l].getBool(0), inInventory[l].getBool(1),inInventory[l].getBool(2),inInventory[l].getBool(3)};
                             boolean[] combinedArray3 = combineArray(boolArray6, boolArray7, boolArray8, boolArray9);
                             if(ifFilled(combinedArray3)){
-                                addtoCombinations(inInventory[i], inInventory[j], inInventory[k], inInventory[l]);
+                                addToCombinations(inInventory[i], inInventory[j], inInventory[k], inInventory[l]);
                             }
                         }
                     }
@@ -156,7 +157,7 @@ public class Calculator extends Database {
                 for(int i = 0; i<fillOrder.length;i++){
                     insertItems(sortedArray[i], i);
                 }
-                combinationstoLowestPrice();
+                combinationsToLowestPrice();
                 return true;
             }
         }
@@ -165,14 +166,14 @@ public class Calculator extends Database {
             for(int i = 0; i<inInventory.length;i++){
                 boolean[] boolArray = {inInventory[i].getBool(0), inInventory[i].getBool(1),inInventory[i].getBool(2),inInventory[i].getBool(3)};
                 if(ifFilled(boolArray)){
-                    addtoCombinations(inInventory[i], dummy, dummy, dummy);
+                    addToCombinations(inInventory[i], dummy, dummy, dummy);
                 }
                 for(int j = i+1; j<inInventory.length; j++){
                     boolean[] boolArray1 = {inInventory[i].getBool(0), inInventory[i].getBool(1),inInventory[i].getBool(2),inInventory[i].getBool(3)};
                     boolean[] boolArray2 = {inInventory[j].getBool(0), inInventory[j].getBool(1),inInventory[j].getBool(2),inInventory[j].getBool(3)};
                     boolean[] combinedBool = combineArray(boolArray1, boolArray2);
                     if(ifFilled(combinedBool)){
-                        addtoCombinations(inInventory[i], inInventory[j], dummy, dummy);
+                        addToCombinations(inInventory[i], inInventory[j], dummy, dummy);
                     }
                     for(int k = j+1; k<inInventory.length;k++){
                         boolean[] boolArray3 = {inInventory[i].getBool(0), inInventory[i].getBool(1),inInventory[i].getBool(2),inInventory[i].getBool(3)};
@@ -180,7 +181,7 @@ public class Calculator extends Database {
                         boolean[] boolArray5 = {inInventory[k].getBool(0), inInventory[k].getBool(1),inInventory[k].getBool(2),inInventory[k].getBool(3)};
                         boolean[] combinedArray2 = combineArray(boolArray3, boolArray4, boolArray5);
                         if(ifFilled(combinedArray2)){
-                            addtoCombinations(inInventory[i], inInventory[j], inInventory[k], dummy);
+                            addToCombinations(inInventory[i], inInventory[j], inInventory[k], dummy);
                         }
                     }
 
@@ -197,7 +198,7 @@ public class Calculator extends Database {
                 for(int i = 0; i<fillOrder.length;i++){
                     insertItems(sortedArray[i], i);
                 }
-                combinationstoLowestPrice();
+                combinationsToLowestPrice();
                 return true;
             }
 
@@ -267,7 +268,7 @@ public class Calculator extends Database {
      * @param item3
      * @param item4
      */
-    public void addtoCombinations(Furniture item1, Furniture item2, Furniture item3, Furniture item4){
+    public void addToCombinations(Furniture item1, Furniture item2, Furniture item3, Furniture item4){
             possibleCombinations.add(new Furniture[] {item1, item2, item3, item4});
     }
     public void printCombinations(){
@@ -306,7 +307,7 @@ public class Calculator extends Database {
             }
         }
     }
-    public void combinationstoLowestPrice(){
+    public void combinationsToLowestPrice(){
         ArrayList<Furniture> lowestprice = new ArrayList<Furniture>();
         for(int i = 0; i<fillOrder.length; i++){
             for(int j = 0; j<4;j++){
