@@ -56,13 +56,6 @@ public class Calculator extends Database {
 
     public boolean priceCalculator ()
     {
-        //coming soon  
-        /*
-            lowestPrice will end up being filled with furniture types
-            the sum of which will result in every boolean in fillOrder being set true, 
-            as requested, Lowest price will be including the ID numbers and prices of 
-            each member in use. 
-        */
         if(inInventory.length == 0){
             return false;
         }
