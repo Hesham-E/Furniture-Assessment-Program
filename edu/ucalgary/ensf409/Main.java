@@ -1,10 +1,9 @@
 package edu.ucalgary.ensf409;
 
-import java.io.IOException;
 /**
  * Main.java for ENSF409 final project W2021
  * @author Josh Vanderstoop <a href="mailto:joshua.vanderstoop@ucalgary.ca">joshua.vanderstoop@ucalgary.ca</a>
- * @author Faisal Hossain <a href="mailto:faisal.hossain1@ucalgary.ca">faisal.hossain1@ucalgary.ca</a>\
+ * @author Faisal Hossain <a href="mailto:faisal.hossain1@ucalgary.ca">faisal.hossain1@ucalgary.ca</a>
  * @author Hesham Elkaliouby <a href="mailto:hesham.elkaliouby@ucalgary.ca">hesham.elkaliouby@ucalgary.ca</a>
  * @author Dagvadorj Altankhuyag <a href="mailto:dagvadorj.altankhuya@ucalgary.ca">dagvadorj.altankhuya@ucalgary.ca</a>
  * @version 1.2
@@ -12,12 +11,26 @@ import java.io.IOException;
  */
 
 /**
- * to run the program:
- * Compile the program by entering this to your terminal (if you are on linux, replace ; with :)
- * javac -cp .;mysql-connector-java-8.0.23.jar;. ./edu/ucalgary/ensf409/Main.java
- * Run the program by entering this to your terminal
- * java -cp .;mysql-connector-java-8.0.23.jar;. edu.ucalgary.ensf409.Main
+ * to run the program: 
+ * Move to the directory of the edu/ucalgary/ensf409 package
+ * Use the following two commands in the terminal of your choice
+ *  to compile:
+ *           javac -cp .;mysql-connector-java-8.0.23.jar edu/ucalgary/ensf409/Main.java
+ *  to run:
+ *           java -cp .;mysql-connector-java-8.0.23.jar edu.ucalgary.ensf409.Main
+ * 
+ * you will be prompted with instructions through the terminal once the program has started. 
  */
+
+ /**
+  * to use the tests:
+  * Move to the directly local with edu
+  * to compile:
+  *     javac -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar edu/ucalgary/ensf409/[TESTNAMEHERE].java
+  * to run:
+  *     java -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore edu.ucalgary.ensf409.[TESTNAMEHERE]
+  * TESTNAMEHERE corresponds to the test name you wish to run
+  */
 
 public class Main {
 
@@ -35,7 +48,7 @@ public class Main {
             // see FileIO documentation
             clientOrder = inputOutput.inputFetching();
         }
-        catch (IOException e)
+        catch (Exception e)
         {
             // if the exeption is thrown and the inputs are not correct 
             System.out.println("One of your inputs was not correct, please restart the application and try again.");

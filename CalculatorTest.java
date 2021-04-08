@@ -86,6 +86,6 @@ public class CalculatorTest
         boolean recieved = test.priceCalculator();
         boolean expected = true;
 
-        assertTrue("priceCalculator failed to find a possible combination", (recieved == expected));
+        assertTrue("priceCalculator found an impossible combination", (recieved == expected));
     }
 }
