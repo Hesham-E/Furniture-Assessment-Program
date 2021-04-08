@@ -4,6 +4,9 @@ import java.io.*;
 /**
  * Calculator.java for ENSF409 final project W2021
  * @author Josh Vanderstoop <a href="mailto:joshua.vanderstoop@ucalgary.ca">joshua.vanderstoop@ucalgary.ca</a>
+ * @author Faisal Hossain <a href="mailto:faisal.hossain1@ucalgary.ca">faisal.hossain1@ucalgary.ca</a>
+ * @author Hesham Elkaliouby <a href="mailto:hesham.elkaliouby@ucalgary.ca">hesham.elkaliouby@ucalgary.ca</a>
+ * @author Dagvadorj Altankhuyag <a href="mailto:dagvadorj.altankhuya@ucalgary.ca">dagvadorj.altankhuya@ucalgary.ca</a>
  * @version 1.3
  * @since 1.0
  * contains two methods:
@@ -66,9 +69,14 @@ public class FileIO {
 
             if (orderFilled)
             {
+                System.out.println("your order has been filled, below are the furniture items that have been ordered. ");
+                for (int i=0; i < calc.lowestPrice.length; i++)
+                {
+                    System.out.println("   ID: " + calc.lowestPrice[i].getID() + ", Price: " + calc.lowestPrice[i].getPrice() + ", Manufacuturer ID: " + calc.lowestPrice[i].getManuID() );
+                }
                 try
                 {
-                    FileWriter fw = new FileWriter("OrderForm.txt", true); // create the file in the working directory
+                    FileWriter fw = new FileWriter("OrderForm.txt", false); // create the file in the working directory
                     BufferedWriter writer = new BufferedWriter(fw);
                     // general formatting subject to change however seen fit, this simply follows the example provided 
                     // in the project handout
@@ -82,7 +90,7 @@ public class FileIO {
                         totalPrice += calc.lowestPrice[i].getPrice(); 
                     }
                     writer.write("\n");
-                    writer.write("Total Price: " + totalPrice);
+                    writer.write("Total Price: $" + totalPrice);
                     writer.flush();
                     writer.close();
                 }
@@ -110,15 +118,6 @@ public class FileIO {
                             manuID = manuID + calc.inInventory[i].getManuID() + " "; 
                         }
                     }
-                // int i = 0;
-                // while (calc.inInventory[i] != null)
-                // {
-                //     if (!manuID.contains(calc.inInventory[i].getManuID())) //ensures there are no duplicates
-                //     {
-                //         manuID = manuID + calc.inInventory[i].getManuID() + " "; 
-                //     }
-                //     i++;
-                // }
                 String [] manuIDSplit = manuID.split("\\s"); // splits the string into the "words" for the completed array
                 calc.printManufacturers(manuIDSplit); // calls for the manufacturers to be printed to the termninal
             } 

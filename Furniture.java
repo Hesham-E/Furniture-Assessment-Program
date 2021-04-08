@@ -4,7 +4,10 @@ package edu.ucalgary.ensf409;
 /**
  * Furnitue.java for ENSF409 Final Project 
  * @author Josh Vanderstoop <a href="mailto:joshua.vanderstoop@ucalgary.ca">joshua.vanderstoop@ucalgary.ca</a>
- * @version 1.0
+ * @author Faisal Hossain <a href="mailto:faisal.hossain1@ucalgary.ca">faisal.hossain1@ucalgary.ca</a>
+ * @author Hesham Elkaliouby <a href="mailto:hesham.elkaliouby@ucalgary.ca">hesham.elkaliouby@ucalgary.ca</a>
+ * @author Dagvadorj Altankhuyag <a href="mailto:dagvadorj.altankhuya@ucalgary.ca">dagvadorj.altankhuya@ucalgary.ca</a>
+ * @version 1.3
  * @since 1.0
  * Furniture is used in the Calculator and Database classes in the form of Furniture arrays 
  *  this class also contains 4 private subclasses, each of which is a member of the Furniture class
@@ -74,19 +77,19 @@ public class Furniture implements Comparable<Furniture>{
     public Furniture(String type, String category)
     {
         this.category = category; 
-        if (this.category .equals("chair"))
+        if (this.category.equals("chair"))
         {
             this.chair = new Chair("null", type, false, false, false, false, -1, "null");
         }
-        if (this.category .equals("desk"))
+        if (this.category.equals("desk"))
         {
             this.desk = new Desk("null", type, false, false, false, -1, "null");
         }
-        if (this.category .equals("lamp"))
+        if (this.category.equals("lamp"))
         {
             this.lamp = new Lamp("null", type, false, false, -1, "null");
         }
-        if (this.category .equals("filing"))
+        if (this.category.equals("filing"))
         {
             this.filing = new Filing("null", type, false, false, false, -1, "null");
         }
@@ -101,19 +104,19 @@ public class Furniture implements Comparable<Furniture>{
     public boolean isFilled ()
     {
         // Note: the '?' operator determins if the () expression is true, and picks the first option. otherwise chooses the second option
-        if (this.category .equals("chair"))
+        if (this.category.equals("chair"))
         {
             return (this.chair.legs && this.chair.arms && this.chair.seat && this.chair.cushion)? true : false;    
         }
-        if (this.category .equals("desk"))
+        if (this.category.equals("desk"))
         {
             return (this.desk.legs && this.desk.drawer && this.desk.top)? true : false; 
         }
-        if (this.category .equals("lamp"))
+        if (this.category.equals("lamp"))
         {
             return (this.lamp.base && this.lamp.bulb)? true : false; 
         }
-        if (this.category .equals("filing"))
+        if (this.category.equals("filing"))
         {
             return (this.filing.cabinet && this.filing.drawers && this.filing.rails)? true : false; 
         }
@@ -173,8 +176,6 @@ public class Furniture implements Comparable<Furniture>{
             return this.filing.price;
         return 0; 
     }
-
-
     public String getType()
     {
         if (this.category.equals("chair")) 
@@ -187,8 +188,6 @@ public class Furniture implements Comparable<Furniture>{
             return this.filing.type;
         return "not found"; 
     }
-
-    
     public Boolean getBool(int index)
     {
         if(index == 0){

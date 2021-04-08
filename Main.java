@@ -4,14 +4,28 @@ import java.io.IOException;
 /**
  * Main.java for ENSF409 final project W2021
  * @author Josh Vanderstoop <a href="mailto:joshua.vanderstoop@ucalgary.ca">joshua.vanderstoop@ucalgary.ca</a>
+ * @author Faisal Hossain <a href="mailto:faisal.hossain1@ucalgary.ca">faisal.hossain1@ucalgary.ca</a>
+ * @author Hesham Elkaliouby <a href="mailto:hesham.elkaliouby@ucalgary.ca">hesham.elkaliouby@ucalgary.ca</a>
+ * @author Dagvadorj Altankhuyag <a href="mailto:dagvadorj.altankhuya@ucalgary.ca">dagvadorj.altankhuya@ucalgary.ca</a>
  * @version 1.2
  * @since 1.0
- * contains only main method, returns nothing. 
  */
 
 /**
- * to run the program: NOT FINISHED
+ * to run the program: 
+ * Move to the directory of the edu/ucalgary/ensf409 package
+ * Use the following two commands in the terminal of your choice
+ *  to compile:
+ *           javac -cp .;mysql-connector-java-8.0.23.jar edu/ucalgary/ensf409/Main.java
+ *  to run:
+ *           java -cp .;mysql-connector-java-8.0.23.jar edu.ucalgary.ensf409.Main
+ * 
+ * you will be prompted with instructions through the terminal once the program has started. 
  */
+
+ /**
+  * to use the tests:  NOT DONE
+  */
 
 public class Main {
 
