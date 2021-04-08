@@ -234,9 +234,9 @@ public class Calculator extends Database {
     }
     /**
      * Dulipicate combineArray Function with three arguments
-     * @param array1
-     * @param array2
-     * @param array3
+     * @param array1  boolean array that consists of the first item
+     * @param array2  boolean array that consists of the Second item
+     * @param array3  boolean array that consists of the Third item
      * @return
      */
     public boolean[] combineArray(boolean[] array1, boolean[]array2, boolean[]array3 ){
@@ -253,10 +253,10 @@ public class Calculator extends Database {
     }
     /**
      * Dulipicate combineArray Function with four arguments
-     * @param array1
-     * @param array2
-     * @param array3
-     * @param array4
+     * @param array1 boolean array that consists of the first item
+     * @param array2 boolean array that consists of the Second item
+     * @param array3 boolean array that consists of the Third item
+     * @param array4 boolean array that consists of the Fourth item
      * @return
      */
     public boolean[] combineArray(boolean[] array1, boolean[]array2, boolean[]array3, boolean[]array4){
@@ -273,10 +273,10 @@ public class Calculator extends Database {
     }
     /**
      * adds a possible Combination to possibleCombinations class variable.
-     * @param item1
-     * @param item2
-     * @param item3
-     * @param item4
+     * @param item1 first Furniture Item to be added
+     * @param item2 second Furniture Item to be added
+     * @param item3 third Furniture Item to be added
+     * @param item4 third Furniture Item to be added
      */
     public void addToCombinations(Furniture item1, Furniture item2, Furniture item3, Furniture item4){
             possibleCombinations.add(new Furniture[] {item1, item2, item3, item4});
@@ -337,6 +337,9 @@ public class Calculator extends Database {
             }
         }
     }
+    /**
+     * Void Function that adds all combinations to lowestprice in a single array
+     */
     public void combinationsToLowestPrice(){
         ArrayList<Furniture> lowestprice = new ArrayList<Furniture>();
         for(int i = 0; i<fillOrder.length; i++){
@@ -354,8 +357,8 @@ public class Calculator extends Database {
     }
     /**
      * Checks if the all values of a boolean array is true, else return false
-     * @param array
-     * @return
+     * @param array boolean Array to be checked
+     * @return returns true if every boolean value is true, else returns false
      */
     public boolean ifFilled(boolean[] array)
     {

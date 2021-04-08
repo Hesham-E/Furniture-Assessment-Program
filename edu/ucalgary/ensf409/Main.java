@@ -24,7 +24,13 @@ import java.io.IOException;
  */
 
  /**
-  * to use the tests:  NOT DONE
+  * to use the tests:
+  * Move to the directly local with edu
+  * to compile:
+  *     javac -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar edu/ucalgary/ensf409/[TESTNAMEHERE].java
+  * to run:
+  *     java -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore edu.ucalgary.ensf409.[TESTNAMEHERE]
+  * TESTNAMEHERE corresponds to the test name you wish to run
   */
 
 public class Main {
