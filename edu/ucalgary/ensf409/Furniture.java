@@ -5,6 +5,8 @@ package edu.ucalgary.ensf409;
  * Furnitue.java for ENSF409 Final Project 
  * @author Josh Vanderstoop <a href="mailto:joshua.vanderstoop@ucalgary.ca">joshua.vanderstoop@ucalgary.ca</a>
  * @author Faisal Hossain <a href="mailto:faisal.hossain1@ucalgary.ca">faisal.hossain1@ucalgary.ca</a>
+ * @author Hesham Elkaliouby <a href="mailto:hesham.elkaliouby@ucalgary.ca">hesham.elkaliouby@ucalgary.ca</a>
+ * @author Dagvadorj Altankhuyag <a href="mailto:dagvadorj.altankhuya@ucalgary.ca">dagvadorj.altankhuya@ucalgary.ca</a>
  * @version 1.3
  * @since 1.0
  * Furniture is used in the Calculator and Database classes in the form of Furniture arrays 
