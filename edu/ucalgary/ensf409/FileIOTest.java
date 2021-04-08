@@ -23,6 +23,6 @@ public class FileIOTest
     @Test
     public void testFormattedFormOutput () throws IOException
     {
-
+        FileIO test = new FileIO();
     }
 }

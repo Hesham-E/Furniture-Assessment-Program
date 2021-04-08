@@ -111,15 +111,6 @@ public class FileIO {
                             manuID = manuID + calc.inInventory[i].getManuID() + " "; 
                         }
                     }
-                // int i = 0;
-                // while (calc.inInventory[i] != null)
-                // {
-                //     if (!manuID.contains(calc.inInventory[i].getManuID())) //ensures there are no duplicates
-                //     {
-                //         manuID = manuID + calc.inInventory[i].getManuID() + " "; 
-                //     }
-                //     i++;
-                // }
                 String [] manuIDSplit = manuID.split("\\s"); // splits the string into the "words" for the completed array
                 calc.printManufacturers(manuIDSplit); // calls for the manufacturers to be printed to the termninal
             } 
