@@ -33,7 +33,7 @@ public class Main {
         {
             // if the exeption is thrown and the inputs are not correct 
             System.out.println("One of your inputs was not correct, please restart the application and try again.");
-            e.printStackTrace();
+            System.exit(0); 
         }
         /* creating the calculator object, which by the constructor also generates
          the database the calculator will pull information from */

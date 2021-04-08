@@ -63,9 +63,6 @@ public class FileIO {
         public void formattedFormOutput(Calculator calc, String[] clientOrder)
         {
             boolean orderFilled = false; // assume the order has not been filled
-            
-            // NOTE: this block of the method is unfinished, and will be decided shortly after the
-            //         Calculator.priceCalculator method has been finished
             orderFilled = calc.priceCalculator();
 
             if (orderFilled)

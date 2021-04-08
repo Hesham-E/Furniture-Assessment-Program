@@ -10,6 +10,7 @@ package edu.ucalgary.ensf409;
  * Furniture is used in the Calculator and Database classes in the form of Furniture arrays 
  *  this class also contains 4 private subclasses, each of which is a member of the Furniture class
  */
+
 public class Furniture implements Comparable<Furniture>{
 
     /**
