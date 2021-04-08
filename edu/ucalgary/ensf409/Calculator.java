@@ -40,7 +40,7 @@ public class Calculator extends Database {
     public int[] sortedArray;
     public List<Furniture[]> possibleCombinations = new ArrayList<Furniture[]>();
     public Calculator(String[] request) {
-        super("jdbc:mysql://localhost/INVENTORY", "Ryuiko", "Hanatan44735137"); // ENSURE THIS IS SET UP FOR SUBMISSION 
+        super("jdbc:mysql://localhost/INVENTORY", "scm", "ensf409"); // ENSURE THIS IS SET UP FOR SUBMISSION 
         super.initializeConnection(); 
         int quantity=0;
         try {

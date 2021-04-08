@@ -69,6 +69,11 @@ public class FileIO {
 
             if (orderFilled)
             {
+                System.out.println("your order has been filled, below are the furniture items that have been ordered. ");
+                for (int i=0; i < calc.lowestPrice.length; i++)
+                {
+                    System.out.println("   ID: " + calc.lowestPrice[i].getID() + ", Price: " + calc.lowestPrice[i].getPrice() + ", Manufacuturer ID: " + calc.lowestPrice[i].getManuID() );
+                }
                 try
                 {
                     FileWriter fw = new FileWriter("OrderForm.txt", false); // create the file in the working directory
@@ -85,7 +90,7 @@ public class FileIO {
                         totalPrice += calc.lowestPrice[i].getPrice(); 
                     }
                     writer.write("\n");
-                    writer.write("Total Price: " + totalPrice);
+                    writer.write("Total Price: $" + totalPrice);
                     writer.flush();
                     writer.close();
                 }
@@ -113,15 +118,6 @@ public class FileIO {
                             manuID = manuID + calc.inInventory[i].getManuID() + " "; 
                         }
                     }
-                // int i = 0;
-                // while (calc.inInventory[i] != null)
-                // {
-                //     if (!manuID.contains(calc.inInventory[i].getManuID())) //ensures there are no duplicates
-                //     {
-                //         manuID = manuID + calc.inInventory[i].getManuID() + " "; 
-                //     }
-                //     i++;
-                // }
                 String [] manuIDSplit = manuID.split("\\s"); // splits the string into the "words" for the completed array
                 calc.printManufacturers(manuIDSplit); // calls for the manufacturers to be printed to the termninal
             } 
