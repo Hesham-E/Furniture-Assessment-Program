@@ -4,7 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 /**
  * Calculator.java for ENSF409 final project W2021
- * Written by Josh Vanderstoop 
+ * @author RYUIKO MADE THIS <a href="mailto:joshua.vanderstoop@ucalgary.ca">joshua.vanderstoop@ucalgary.ca</a>
+ * @version 1.2
+ * @since 1.0
  * contains several methods to obtain information from the database
  * and calculate the cheapest option for the clients request.
  * these methods make use of the furniture class and extension of the Database class
