@@ -3,8 +3,10 @@ package edu.ucalgary.ensf409;
 import java.io.IOException;
 /**
  * Main.java for ENSF409 final project W2021
- * Written by Josh Vanderstoop 
- * contains only main method, returns nothing. 
+ * @author Josh Vanderstoop <a href="mailto:joshua.vanderstoop@ucalgary.ca">joshua.vanderstoop@ucalgary.ca</a>
+ * @author Faisal Hossain <a href="mailto:faisal.hossain1@ucalgary.ca">faisal.hossain1@ucalgary.ca</a>
+ * @version 1.2
+ * @since 1.0
  */
 
 /**
@@ -31,7 +33,7 @@ public class Main {
         {
             // if the exeption is thrown and the inputs are not correct 
             System.out.println("One of your inputs was not correct, please restart the application and try again.");
-            e.printStackTrace();
+            System.exit(0); 
         }
         /* creating the calculator object, which by the constructor also generates
          the database the calculator will pull information from */

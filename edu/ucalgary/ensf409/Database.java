@@ -5,7 +5,10 @@ import java.sql.*;
 
 /**
  * Database.java for ENSF409 Final Project W2021
- * Written by Josh Vanderstoop 
+ * @author Josh Vanderstoop <a href="mailto:joshua.vanderstoop@ucalgary.ca">joshua.vanderstoop@ucalgary.ca</a>
+ * @author Faisal Hossain <a href="mailto:faisal.hossain1@ucalgary.ca">faisal.hossain1@ucalgary.ca</a>
+ * @version 1.4
+ * @since 1.0
  * contains methods which connect to the specified database
  * no methods add data, only access or remove data
  */
@@ -51,7 +54,7 @@ public class Database {
         } catch (SQLException e) 
         {
             System.out.println("Connection failed");
-            e.printStackTrace();
+            System.exit(0);
         }
     }
 
@@ -97,8 +100,8 @@ public class Database {
         }
         catch (SQLException e) 
         {
-            System.out.println("Names cannot be shown.");
-            e.printStackTrace();
+            System.out.println("User input error, please review the syntax provided and try again. ");
+            System.exit(0);
         }
         return combinations.toArray(new Furniture[combinations.size()]);
     }
@@ -162,8 +165,11 @@ public class Database {
             System.out.println();
             System.out.println();
         }
+    } // end of class declaration
+
+    public Connection getConnect ()
+    {
+        return this.connect;
     }
-
-
     
 }
