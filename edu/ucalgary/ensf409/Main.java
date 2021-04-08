@@ -1,6 +1,5 @@
 package edu.ucalgary.ensf409;
 
-import java.io.IOException;
 /**
  * Main.java for ENSF409 final project W2021
  * @author Josh Vanderstoop <a href="mailto:joshua.vanderstoop@ucalgary.ca">joshua.vanderstoop@ucalgary.ca</a>
@@ -49,7 +48,7 @@ public class Main {
             // see FileIO documentation
             clientOrder = inputOutput.inputFetching();
         }
-        catch (IOException e)
+        catch (Exception e)
         {
             // if the exeption is thrown and the inputs are not correct 
             System.out.println("One of your inputs was not correct, please restart the application and try again.");
