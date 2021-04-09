@@ -80,7 +80,7 @@ public class FileIO {
                     BufferedWriter writer = new BufferedWriter(fw);
                     // general formatting subject to change however seen fit, this simply follows the example provided 
                     // in the project handout
-                    writer.write("Furniture Order Form\n\nFaculty Name:\nContact:\nDate\n\nOrigional Request: " 
+                    writer.write("Furniture Order Form\n\nFaculty Name:\nContact:\nDate\n\nOriginal Request: " 
                                     + clientOrder[0] + " " + clientOrder[1] + ", " 
                                             + clientOrder[2] + "\n\nItems Ordered\n" );
                     int totalPrice=0; 

@@ -57,7 +57,6 @@ public class Main {
         /* creating the calculator object, which by the constructor also generates
          the database the calculator will pull information from */
         Calculator calculating = new Calculator(clientOrder);
-        calculating.priceCalculator(); // see Calculator documentation
         inputOutput.formattedFormOutput(calculating, clientOrder); // see FileIO documentation
     }
 }

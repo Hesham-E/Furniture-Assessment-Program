@@ -40,7 +40,7 @@ public class Calculator extends Database {
     public int[] sortedArray;
     public List<Furniture[]> possibleCombinations = new ArrayList<Furniture[]>();
     public Calculator(String[] request) {
-        super("jdbc:mysql://localhost/INVENTORY", "root", "1234");
+        super("jdbc:mysql://localhost/INVENTORY", "Username", "Password");
         super.initializeConnection(); 
         int quantity=0;
         try {
@@ -53,6 +53,7 @@ public class Calculator extends Database {
             System.exit(0);
         }
         this.inInventory = super.findUsedFurniture(request[0], request[1], quantity);
+        Arrays.sort(this.inInventory);
         this.fillOrder = new Furniture[quantity][3];
     }
     /**
@@ -218,7 +219,7 @@ public class Calculator extends Database {
      * Combines two boolean arrays into one boolean array by ORing the two arrays.
      * @param array1 - boolean array that consists of the first item
      * @param array2 - boolean array that consists of the Second item
-     * @return
+     * @return boolean array that is the result of oring the arrays
      */
     public boolean[] combineArray(boolean[] array1, boolean[]array2){
         boolean[] newBool = new boolean[array1.length];
@@ -237,7 +238,7 @@ public class Calculator extends Database {
      * @param array1  boolean array that consists of the first item
      * @param array2  boolean array that consists of the Second item
      * @param array3  boolean array that consists of the Third item
-     * @return
+     * @return boolean array that is the result of oring the arrays
      */
     public boolean[] combineArray(boolean[] array1, boolean[]array2, boolean[]array3 ){
         boolean[] newBool = new boolean[array1.length];
@@ -257,7 +258,7 @@ public class Calculator extends Database {
      * @param array2 boolean array that consists of the Second item
      * @param array3 boolean array that consists of the Third item
      * @param array4 boolean array that consists of the Fourth item
-     * @return
+     * @return boolean array that is the result of oring the arrays
      */
     public boolean[] combineArray(boolean[] array1, boolean[]array2, boolean[]array3, boolean[]array4){
         boolean[] newBool = new boolean[array1.length];
@@ -351,6 +352,10 @@ public class Calculator extends Database {
         }
         this.lowestPrice = lowestprice.toArray(new Furniture[lowestprice.size()]);
     }
+    /**
+     * Getter function that returns the fillOrder of the client, that is a 2D Furniture array of items
+     * @return returns 2D array of the fillOrder of the cilent
+     */
     public Furniture[][] getFillOrder()
     {
         return this.fillOrder; 
