@@ -14,10 +14,14 @@ package edu.ucalgary.ensf409;
  * to run the program: 
  * Move to the directory of the edu/ucalgary/ensf409 package
  * Use the following two commands in the terminal of your choice
- *  to compile:
- *           javac -cp .;mysql-connector-java-8.0.23.jar edu/ucalgary/ensf409/Main.java
- *  to run:
- *           java -cp .;mysql-connector-java-8.0.23.jar edu.ucalgary.ensf409.Main
+ * to compile (windows):
+ *           javac -cp .;lib/mysql-connector-java-8.0.23.jar edu/ucalgary/ensf409/Main.java
+ * to compile (linux):
+ *           javac -cp .:lib/mysql-connector-java-8.0.23.jar edu/ucalgary/ensf409/Main.java
+ * to run (windows):
+ *           java -cp .;lib/mysql-connector-java-8.0.23.jar edu.ucalgary.ensf409.Main
+ * to run (Linux):
+ *           java -cp .:lib/mysql-connector-java-8.0.23.jar edu.ucalgary.ensf409.Main
  * 
  * you will be prompted with instructions through the terminal once the program has started. 
  */
@@ -25,10 +29,14 @@ package edu.ucalgary.ensf409;
  /**
   * to use the tests:
   * Move to the directly local with edu
-  * to compile:
-  *     javac -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar edu/ucalgary/ensf409/[TESTNAMEHERE].java
-  * to run:
-  *     java -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore edu.ucalgary.ensf409.[TESTNAMEHERE]
+  * to compile (windows):
+  *     javac -cp .;lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar;lib/mysql-connector-java-8.0.23.jar edu/ucalgary/ensf409/[TESTNAMEHERE].java
+  * to compile (Linux):
+  *     javac -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar:lib/mysql-connector-java-8.0.23.jar edu/ucalgary/ensf409/[TESTNAMEHERE].java
+  * to run(windows):
+  *     java -cp .;lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar;lib/mysql-connector-java-8.0.23.jar org.junit.runner.JUnitCore edu.ucalgary.ensf409.[TESTNAMEHERE]
+  * to run(Linux):
+  *     java -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar:lib/mysql-connector-java-8.0.23.jar org.junit.runner.JUnitCore edu.ucalgary.ensf409.[TESTNAMEHERE]
   * TESTNAMEHERE corresponds to the test name you wish to run
   */
 

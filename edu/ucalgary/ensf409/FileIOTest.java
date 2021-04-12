@@ -16,13 +16,16 @@ public class FileIOTest
         FileIO test = new FileIO();
         String[] recieved = test.inputFetching();
         String[] expected = {"Executive", "chair", "1"};
-
         assertTrue("Input recieved is different from expected", Arrays.equals(expected, recieved));
     }
 
     @Test
-    public void testFormattedFormOutput () throws IOException
+    public void testInputFetching2() throws IOException
     {
         FileIO test = new FileIO();
+        String[] recieved = test.inputFetching();
+        String[] expected = {"Mesh", "chair", "10"};
+
+        assertTrue("Input recieved is different from expected", Arrays.equals(expected, recieved));
     }
 }

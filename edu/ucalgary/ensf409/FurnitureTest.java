@@ -27,9 +27,17 @@ public class FurnitureTest
     @Test
     public void testIsFilled ()
     {
-        Furniture test = new Furniture("mesh", "chair", "1234", false, true, false, true, 100, "001");
+        Furniture test = new Furniture("traditional", "desk", "1234", false, true, false, true, 100, "001");
         boolean recieved = test.isFilled();
         boolean expected = false;
         assertTrue("isFilled() incorrectly detected a filled object.", expected == recieved);
+    }
+    @Test
+    public void testgetBool()
+    {
+        Furniture test = new Furniture("mesh", "chair", "999", true, true, false, true, 100, "001");
+        boolean recieved = test.getBool(0);
+        boolean expected = true;
+        assertTrue("getBool() incorrectly detected a non-filled object.", expected == recieved);
     }
 }

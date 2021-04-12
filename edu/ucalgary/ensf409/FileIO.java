@@ -1,5 +1,4 @@
 package edu.ucalgary.ensf409;
-
 import java.io.*;
 /**
  * Calculator.java for ENSF409 final project W2021
