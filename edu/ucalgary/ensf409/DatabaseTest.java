@@ -69,15 +69,18 @@ public class DatabaseTest
     public void testPrintManufacturers ()
     {
         Database test = new Database("jdbc:mysql://localhost/INVENTORY", "scm", "ensf409");
+
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         PrintStream original = System.out;
         System.setOut(new PrintStream(outputStream));
+
         test.initializeConnection();
         String[] manufacturer = {"005"};
         test.printManufacturers(manufacturer);
+
         System.out.flush();
         System.setOut(original);
-        System.out.println(outputStream.toString());
+        
         String expected = "     - For Fine Office Supplies in AB, call: 403-980-9876";
         assertTrue("Manufacturer not found and printed, or printed incorrectly", outputStream.toString().trim().equals(expected.trim()));
     }
