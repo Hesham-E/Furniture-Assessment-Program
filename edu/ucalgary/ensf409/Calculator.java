@@ -114,7 +114,7 @@ public class Calculator extends Database {
                     if(insertedItems == fillOrder.length){
                         break;
                     }
-                    insertItems(sortedArray[i], i);
+                    insertItems(sortedArray[i], insertedItems);
                 }
                 if(insertedItems < fillOrder.length){
                     return false;
@@ -174,7 +174,7 @@ public class Calculator extends Database {
                     if(insertedItems == fillOrder.length){
                         break;
                     }
-                    insertItems(sortedArray[i], i);
+                    insertItems(sortedArray[i], insertedItems);
                 }
                 if(insertedItems < fillOrder.length){
                     return false;
@@ -224,7 +224,7 @@ public class Calculator extends Database {
                     if(insertedItems == fillOrder.length){
                         break;
                     }
-                    insertItems(sortedArray[i], i);
+                    insertItems(sortedArray[i], insertedItems);
                 }
                 if(insertedItems < fillOrder.length){
                     return false;
@@ -405,13 +405,13 @@ public class Calculator extends Database {
             if(idsInFillOrder.get(i).equals(combination[0].getID())){
                 return false;
             }
-            if(idsInFillOrder.get(i).equals(combination[0].getID())){
+            if(idsInFillOrder.get(i).equals(combination[1].getID())){
                 return false;
             }
-            if(idsInFillOrder.get(i).equals(combination[0].getID())){
+            if(idsInFillOrder.get(i).equals(combination[2].getID())){
                 return false;
             }
-            if(idsInFillOrder.get(i).equals(combination[0].getID())){
+            if(idsInFillOrder.get(i).equals(combination[3].getID())){
                 return false;
             }
         }

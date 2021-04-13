@@ -4,12 +4,11 @@ Faculty Name:
 Contact:
 Date
 
-Original Request: Standing Desk, 2
+Original Request: Study Lamp, 3
 
 Items Ordered
-ID: D2341
-ID: D1927
-ID: D3820
-ID: D4438
+ID: L223
+ID: L980
+ID: L928
 
-Total Price: $600
+Total Price: $14

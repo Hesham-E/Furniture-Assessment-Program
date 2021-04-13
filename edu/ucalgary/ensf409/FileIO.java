@@ -126,6 +126,9 @@ public class FileIO {
                 String manuID = "";
                 /* this creates a String[] that contains the manufacturers of the peices of furniture 
                     in the database under the specified table and type */ 
+                if(calc.inInventory.length == 0){
+                    return;
+                }
                     for(int i = 0; i<calc.inInventory.length;i++){
                         if (!manuID.contains(calc.inInventory[i].getManuID())) //ensures there are no duplicates
                         {
