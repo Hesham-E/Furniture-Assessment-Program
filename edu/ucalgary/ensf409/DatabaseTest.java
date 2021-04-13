@@ -26,7 +26,7 @@ public class DatabaseTest
     @Test
     public void testConnection () throws SQLException
     {
-        Database test = new Database("jdbc:mysql://localhost/INVENTORY", "USERNAME", "PASSOWRD");
+        Database test = new Database("jdbc:mysql://localhost/INVENTORY", "scm", "ensf409");
         test.initializeConnection();
         assertTrue("Connection not properly initialized",  test.getConnect().isValid(1) == true);
     }
@@ -34,7 +34,7 @@ public class DatabaseTest
     @Test
     public void testFindUsedFurniture ()
     {
-        Database test = new Database("jdbc:mysql://localhost/INVENTORY", "USERNAME", "PASSOWRD");
+        Database test = new Database("jdbc:mysql://localhost/INVENTORY", "scm", "ensf409");
         test.initializeConnection();
         Furniture[] recieved = test.findUsedFurniture("kneeling", "chair", 2);
         Furniture[] expectedArr = {new Furniture("Kneeling", "chair", "C1320", true, false, false, false, 50, "002"),
@@ -54,29 +54,31 @@ public class DatabaseTest
     @Test
     public void testRemoveFurniture () throws SQLException
     {
-        Database test = new Database("jdbc:mysql://localhost/INVENTORY", "USERNAME", "PASSOWRD");
+        Database test = new Database("jdbc:mysql://localhost/INVENTORY", "scm", "ensf409");
         test.initializeConnection();
         test.removeFurniture("chair", "C0914");
 
-        Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/INVENTORY", "USERNAME", "PASSOWRD");
+        Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/INVENTORY", "scm", "ensf409");
         PreparedStatement statment = connect.prepareStatement("SELECT * FROM chair WHERE ID = 'C0914'");
 
         assertFalse("Delete operation unsuccessful", statment.executeQuery().next());
         statment.close();
     }
 
-    //Test not working
     @Test
     public void testPrintManufacturers ()
     {
-        Database test = new Database("jdbc:mysql://localhost/INVENTORY", "USERNAME", "PASSOWRD");
+        Database test = new Database("jdbc:mysql://localhost/INVENTORY", "scm", "ensf409");
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         PrintStream original = System.out;
         System.setOut(new PrintStream(outputStream));
         test.initializeConnection();
         String[] manufacturer = {"005"};
         test.printManufacturers(manufacturer);
-        assertTrue("Manufacturer not found and printed, or printed incorrectly", outputStream.toString().equals("     - For Fine Office Supplies in AB, call: 403-980-9876"));
+        System.out.flush();
         System.setOut(original);
+        System.out.println(outputStream.toString());
+        String expected = "     - For Fine Office Supplies in AB, call: 403-980-9876";
+        assertTrue("Manufacturer not found and printed, or printed incorrectly", outputStream.toString().trim().equals(expected.trim()));
     }
 }
