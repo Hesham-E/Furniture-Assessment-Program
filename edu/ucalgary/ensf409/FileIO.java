@@ -1,4 +1,6 @@
 package edu.ucalgary.ensf409;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.io.*;
 /**
  * Calculator.java for ENSF409 final project W2021
@@ -16,6 +18,7 @@ import java.io.*;
  */
 public class FileIO {
 
+        Pattern pattern = Pattern.compile("(\\w+) (\\w+), (\\d+)");
         /**
          * inputFetching method
          * prints instructions and examples to the terminal
@@ -24,8 +27,9 @@ public class FileIO {
          * @return String[] of user input, contains type, category and quantity
          * @throws IOException
          */
-        public String[] inputFetching() throws IOException
+        public String[] inputFetching()
         {
+            try{
             System.out.println();
             System.out.println();
             System.out.println("Hello, welcome to the Supply Chain Management (SCM) application");
@@ -39,9 +43,14 @@ public class FileIO {
             System.out.println();
             System.out.println();
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)); 
-            String input = reader.readLine(); 
-            String [] order = input.split("\\s");
-            order[1] = order[1].substring(0, order[1].length()-1) ; 
+            String input = reader.readLine();
+            Matcher matches = pattern.matcher(input);
+            if(!matches.matches()){
+                String[] invalid = {"null"};
+                return invalid;
+            }
+            String [] order = {matches.group(1), matches.group(2), matches.group(3)};
+            // order[1] = order[1].substring(0, order[1].length()-1) ; 
             System.out.println();
             System.out.println();
             System.out.println("If your order is successful, there will be an order form created in the filePath where");
@@ -52,6 +61,12 @@ public class FileIO {
             System.out.println();
             System.out.println();
             return order;
+            }
+            catch(Exception e){
+                String[] invalid = {"null"};
+                return invalid;
+            }
+            
         }
 
 

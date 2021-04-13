@@ -5,6 +5,8 @@ import static org.junit.Assert.assertTrue;
 import java.io.*;
 import java.util.Arrays;
 
+import javax.print.DocFlavor.READER;
+
 import org.junit.Test;
 
 public class FileIOTest
@@ -24,9 +26,8 @@ public class FileIOTest
         System.setIn(original);
         assertTrue("Input recieved is different from expected", Arrays.equals(expected, recieved));
     }
-
     @Test
-    public void testInputFetching2() throws IOException
+    public void testInputFetchingInvalid() throws IOException
     {
         FileIO test = new FileIO();
 
@@ -63,3 +64,4 @@ public class FileIOTest
         assertTrue("Output printed to console was that not of a successful order", expected.equals(recieved));
     }
 }
+
