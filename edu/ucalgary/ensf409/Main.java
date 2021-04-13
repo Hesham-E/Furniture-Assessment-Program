@@ -29,10 +29,17 @@ package edu.ucalgary.ensf409;
  /**
   * to use the tests:
   * Move to the directly local with edu
+  * First, compile the whole program using the commands below
+  * to compile (windows):
+  *           javac -cp .;lib/mysql-connector-java-8.0.23.jar edu/ucalgary/ensf409/Main.java
+  * to compile (linux):
+  *           javac -cp .:lib/mysql-connector-java-8.0.23.jar edu/ucalgary/ensf409/Main.java
+  * Second, Compile the tests using the commands below
   * to compile (windows):
   *     javac -cp .;lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar;lib/mysql-connector-java-8.0.23.jar edu/ucalgary/ensf409/[TESTNAMEHERE].java
   * to compile (Linux):
   *     javac -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar:lib/mysql-connector-java-8.0.23.jar edu/ucalgary/ensf409/[TESTNAMEHERE].java
+  * Finally, run the tests using the commands below
   * to run(windows):
   *     java -cp .;lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar;lib/mysql-connector-java-8.0.23.jar org.junit.runner.JUnitCore edu.ucalgary.ensf409.[TESTNAMEHERE]
   * to run(Linux):
@@ -59,7 +66,15 @@ public class Main {
         catch (Exception e)
         {
             // if the exeption is thrown and the inputs are not correct 
-            System.out.println("One of your inputs was not correct, please restart the application and try again.");
+            System.out.println("One of your inputs was not correct, please restart the application and try again. Please ensure you type in the correct format as specified in the program");
+            System.out.println("Example: Mesh Chair, 1");
+            System.out.println("Hints: At this time, the only categories avaliable with this application are lamp, chair, desk and filing");
+            System.exit(0); 
+        }
+        if(clientOrder.length == 1){
+            System.out.println("One of your inputs was not correct, please restart the application and try again. Please ensure you type in the correct format as specified in the program");
+            System.out.println("Example: Mesh Chair, 1");
+            System.out.println("Hints: At this time, the only categories avaliable with this application are lamp, chair, desk and filing");
             System.exit(0); 
         }
         /* creating the calculator object, which by the constructor also generates
