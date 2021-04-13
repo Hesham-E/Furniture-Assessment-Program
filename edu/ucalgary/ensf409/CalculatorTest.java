@@ -81,7 +81,7 @@ public class CalculatorTest
     @Test
     public void testPriceCalculatorPossible ()
     {
-        String[] request = {"Executive", "chair", "1"};
+        String[] request = {"Ergonomic", "chair", "1"};
         Calculator test = new Calculator(request);
         boolean recieved = test.priceCalculator();
         boolean expected = true;

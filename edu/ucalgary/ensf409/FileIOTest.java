@@ -1,12 +1,8 @@
 package edu.ucalgary.ensf409;
 
 import static org.junit.Assert.assertTrue;
-
 import java.io.*;
 import java.util.Arrays;
-
-import javax.print.DocFlavor.READER;
-
 import org.junit.Test;
 
 public class FileIOTest

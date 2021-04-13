@@ -162,7 +162,6 @@ public class Database {
             } catch (SQLException e) // if that manufacturer no longer exists in the database, do the following
             {
                 System.out.println("The manufacuturer listed under: " + manuID[i] + " is no longer a supplier to the Univeristy of Calgary");
-                e.printStackTrace();
             }
             System.out.println();
             System.out.println();
