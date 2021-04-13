@@ -55,6 +55,10 @@ public class Main {
         { 
             // see FileIO documentation
             clientOrder = inputOutput.inputFetching();
+            /* creating the calculator object, which by the constructor also generates
+            the database the calculator will pull information from */
+            Calculator calculating = new Calculator(clientOrder);
+            inputOutput.formattedFormOutput(calculating, clientOrder); // see FileIO documentation
         }
         catch (Exception e)
         {
@@ -62,9 +66,6 @@ public class Main {
             System.out.println("One of your inputs was not correct, please restart the application and try again.");
             System.exit(0); 
         }
-        /* creating the calculator object, which by the constructor also generates
-         the database the calculator will pull information from */
-        Calculator calculating = new Calculator(clientOrder);
-        inputOutput.formattedFormOutput(calculating, clientOrder); // see FileIO documentation
+        
     }
 }
