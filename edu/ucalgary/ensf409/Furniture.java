@@ -20,7 +20,7 @@ public class Furniture implements Comparable<Furniture>{
      * category: String     - decides which of the following subclasses should be instantiated to fill the client order 
      * chair: Chair         - an Object of type Chair used to fill the client order
      * desk: Desk           - an Object of type Desk used to fill the client order
-     * filing: filing       - an Object of type Filing used to fill the client order
+     * filing: Filing       - an Object of type Filing used to fill the client order
      * lamp: Lamp           - an Object of type Lamp used to fill the client order
      */
     public String category; 
@@ -125,7 +125,7 @@ public class Furniture implements Comparable<Furniture>{
 
     /**
      * getID getter method 
-     * provided easy access to a members ID String
+     * Provided easy access to a members ID String.
      * @return the ID of the furniture object that called the function
      */
     public String getID()
@@ -143,7 +143,7 @@ public class Furniture implements Comparable<Furniture>{
 
     /**
      * getManuID getter method
-     * provides easy access to a members ManuID String
+     * Provides easy access to a members ManuID String.
      * @return the ManuID of the furniture object that called the function
      */
     public String getManuID()
@@ -161,21 +161,27 @@ public class Furniture implements Comparable<Furniture>{
 
     /**
      * getPrice getter method 
-     * provides access to the members Price in integer form 
+     * Provides access to the members Price in integer form.
      * @return integer price value of the furniture piece
      */
     public int getPrice()
     {
-        if (this.category .equals("chair")) 
+        if (this.category.equals("chair")) 
             return this.chair.price; 
-        if (this.category .equals("desk"))
+        if (this.category.equals("desk"))
             return this.desk.price;
-        if (this.category .equals("lamp"))
+        if (this.category.equals("lamp"))
             return this.lamp.price; 
-        if (this.category .equals("filing"))
+        if (this.category.equals("filing"))
             return this.filing.price;
         return 0; 
     }
+
+    /**
+     * getType getter method
+     * Provides access to the members Type in String form.
+     * @return the type of the furniture
+     */
     public String getType()
     {
         if (this.category.equals("chair")) 
@@ -188,6 +194,15 @@ public class Furniture implements Comparable<Furniture>{
             return this.filing.type;
         return "not found"; 
     }
+
+    /**
+     * getBool getter method
+     * Provides access to the furnitures' parts.
+     * A boolean is returned based whether or not a part
+     * is available to be salvaged from a furniture item.
+     * @param index
+     * @return The status of the furniture's part
+     */
     public Boolean getBool(int index)
     {
         if(index == 0){

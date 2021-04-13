@@ -169,6 +169,10 @@ public class Database {
         }
     } // end of class declaration
 
+    /**
+     * getConnect method
+     * @return the Connection object to the SQL server
+     */
     public Connection getConnect ()
     {
         return this.connect;
