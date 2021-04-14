@@ -49,18 +49,23 @@ public class FileIO {
                 String[] invalid = {"null"};
                 return invalid;
             }
-            String [] order = {matches.group(1), matches.group(2), matches.group(3)};
-            // order[1] = order[1].substring(0, order[1].length()-1) ; 
-            System.out.println();
-            System.out.println();
-            System.out.println("If your order is successful, there will be an order form created in the filePath where");
-            System.out.println("this program is saved, please refer to the file for a completed order when prompted by");
-            System.out.println("the terminal.");
-            System.out.println("If your order cannot be fulfilled with the current inventory, you will be notified by the terminal");
-            System.out.println("with a list of manufacturers that make the furniture item that you have requested.");
-            System.out.println();
-            System.out.println();
-            return order;
+            String category = matches.group(2).toLowerCase();
+            System.out.println(category.equals("chair"));
+            if((category.equals("lamp"))||(category.equals("chair"))||(category.equals("filing"))||(category.equals("desk"))){
+                String [] order = {matches.group(1), matches.group(2), matches.group(3)};
+                System.out.println();
+                System.out.println();
+                System.out.println("If your order is successful, there will be an order form created in the filePath where");
+                System.out.println("this program is saved, please refer to the file for a completed order when prompted by");
+                System.out.println("the terminal.");
+                System.out.println("If your order cannot be fulfilled with the current inventory, you will be notified by the terminal");
+                System.out.println("with a list of manufacturers that make the furniture item that you have requested.");
+                System.out.println();
+                System.out.println();
+                return order;
+            }
+            String[] invalid = {"null2", matches.group(2)};
+            return invalid;
             }
             catch(Exception e){
                 String[] invalid = {"null"};
