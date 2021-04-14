@@ -4,12 +4,11 @@ Faculty Name:
 Contact:
 Date
 
-Original Request: Standing Desk, 2
+Original Request: Mesh Chair, 1
 
 Items Ordered
-ID: D2341
-ID: D1927
-ID: D3820
-ID: D4438
+ID: C9890
+ID: C6748
+ID: C8138
 
-Total Price: $600
+Total Price: $200

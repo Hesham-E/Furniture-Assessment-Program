@@ -77,8 +77,10 @@ public class Main {
         }
         if(clientOrder.length == 1){
             System.out.println("One of your inputs was not correct, please restart the application and try again. Please ensure you type in the correct format as specified in the program");
-            System.out.println("Example: Mesh Chair, 1");
+            System.out.println("Example:");
+            System.out.println("Mesh Chair, 1");
             System.out.println("Hints: At this time, the only categories avaliable with this application are lamp, chair, desk and filing");
+            System.out.println("Hints: Is there a space between the comma and the number?");
             System.exit(0); 
         }
         

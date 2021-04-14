@@ -94,7 +94,7 @@ public class Database {
                 }
                 else if (category.equals("lamp") )
                 {
-                    combinations.add(new Furniture(set.getString("type"), "lamp", set.getString("ID"), set.getBoolean("Price"), set.getBoolean("Bulb"), false, false, set.getInt("Price"), set.getString("ManuID")));
+                    combinations.add(new Furniture(set.getString("type"), "lamp", set.getString("ID"), set.getBoolean("Base"), set.getBoolean("Bulb"), false, false, set.getInt("Price"), set.getString("ManuID")));
                 }
             }
             statement.close();
