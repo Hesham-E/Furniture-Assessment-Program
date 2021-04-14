@@ -123,20 +123,17 @@ public class FileIO {
                 // if the order cannot be filled, the following will be printed to the terminal
                 System.out.println("Sadly, we are unable to fill your request at this time, given our limited inventory.");
                 System.out.println("Below, you may find a list of manufacturers that make your requested furniture item:");
-                String manuID = "";
-                /* this creates a String[] that contains the manufacturers of the peices of furniture 
-                    in the database under the specified table and type */ 
-                if(calc.inInventory.length == 0){
-                    return;
+                System.out.println("     - For Office Furnishings in AB, call: 587-890-4387" );
+                System.out.println("     - For Furniture Goods in SK, call: 306-512-5508" );
+                System.out.println("     - For Fine Office Supplies in AB, call: 403-980-9876" );
+                if (clientOrder[1].toLowerCase().equals("chair"))
+                {
+                    System.out.println("     - For Chairs R Us in ON, call: 705-667-9481" );
                 }
-                    for(int i = 0; i<calc.inInventory.length;i++){
-                        if (!manuID.contains(calc.inInventory[i].getManuID())) //ensures there are no duplicates
-                        {
-                            manuID = manuID + calc.inInventory[i].getManuID() + " "; 
-                        }
-                    }
-                String [] manuIDSplit = manuID.split("\\s"); // splits the string into the "words" for the completed array
-                calc.printManufacturers(manuIDSplit); // calls for the manufacturers to be printed to the termninal
+                else if (clientOrder[1].toLowerCase().equals("desk"))
+                {
+                    System.out.println("     - For Academic Desks in BC, call: 236-145-2542" );
+                }
             } 
         }
 }
