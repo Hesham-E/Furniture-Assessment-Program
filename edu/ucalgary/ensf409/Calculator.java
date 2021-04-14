@@ -26,12 +26,15 @@ public class Calculator extends Database {
      *                                          inInventory, which may or may not fill the order.
      *                                          The row that fills the order in the cheapest way 
      *                                          possible will be given to lowestPrice
-     * lowestPrice: Furniture[]             - will contain the set of furniture items from the database
+     * lowestPrice: Furniture[]                - will contain the set of furniture items from the database
      *                                          that fill the order in the cheapest way.
      *  
-     * pricesTotal                             - ArrayList of the PriceTotals for each combination found
+     * pricesTotal: ArrayList<Integer>         - ArrayList of the PriceTotals for each combination found
      * 
-     * sortedArray                             - Array of sorted PriceTotals from ArrayList
+     * sortedArray: int[]                       - Array of sorted PriceTotals from ArrayList
+     * insertedItems: int                       - int Index for how much items has been inserted into the fillOrder data member
+     * counter: int                             - Counter that is used to check every possible combination to fulfill the client's order
+     * idsInFillOrder: ArrayList<String>        - String ArrayList of String id's parts that is already added into the fillOrder 2d array, to prevent duplicates in the same order 
      */
     public Furniture[] lowestPrice;
     public Furniture[] inInventory; 
@@ -40,6 +43,7 @@ public class Calculator extends Database {
     public ArrayList<Integer> pricesTotal = new ArrayList<Integer>();
     public int[] sortedArray;
     public int insertedItems = 0;
+    public int counter = 0;
     public List<Furniture[]> possibleCombinations = new ArrayList<Furniture[]>();
     public Calculator(String[] request) {
         super("jdbc:mysql://localhost/INVENTORY", "Username", "Password");
@@ -110,9 +114,19 @@ public class Calculator extends Database {
             }
             else{
                 calculatePricesTotal();
-                for(int i = 0; i<sortedArray.length;i++){
+                for(int i = 0; i<=sortedArray.length;i++){
                     if(insertedItems == fillOrder.length){
                         break;
+                    }
+                    if(counter == sortedArray.length){
+                        break;
+                    } 
+                    if((i == sortedArray.length) && (insertedItems < fillOrder.length)){
+                        idsInFillOrder = new ArrayList<String>();
+                        i = counter;
+                        counter++;
+                        insertedItems = 0;
+                        continue;
                     }
                     insertItems(sortedArray[i], insertedItems);
                 }
@@ -170,9 +184,19 @@ public class Calculator extends Database {
             }
             else{
                 calculatePricesTotal();
-                for(int i = 0; i<sortedArray.length;i++){
+                for(int i = 0; i<=sortedArray.length;i++){
                     if(insertedItems == fillOrder.length){
                         break;
+                    }
+                    if(counter == sortedArray.length){
+                        break;
+                    } 
+                    if((i == sortedArray.length) && (insertedItems < fillOrder.length)){
+                        idsInFillOrder = new ArrayList<String>();
+                        i = counter;
+                        counter++;
+                        insertedItems = 0;
+                        continue;
                     }
                     insertItems(sortedArray[i], insertedItems);
                 }
@@ -220,9 +244,19 @@ public class Calculator extends Database {
             }
             else{
                 calculatePricesTotal();
-                for(int i = 0; i<sortedArray.length;i++){
+                for(int i = 0; i<=sortedArray.length;i++){
                     if(insertedItems == fillOrder.length){
                         break;
+                    }
+                    if(counter == sortedArray.length){
+                        break;
+                    } 
+                    if((i == sortedArray.length) && (insertedItems < fillOrder.length)){
+                        idsInFillOrder = new ArrayList<String>();
+                        i = counter;
+                        counter++;
+                        insertedItems = 0;
+                        continue;
                     }
                     insertItems(sortedArray[i], insertedItems);
                 }
@@ -397,6 +431,12 @@ public class Calculator extends Database {
     }
     return true;
     }
+    /**
+     * Method that checks existing IDs in a previous to prevent duplicate ID orders to the Furniture combination argument. Returns true if
+     * existing IDs were not found in the idsInFillOrder and adds the current combination ID's part into the idsInFillOrder arraylist.  
+     * @param combination Combination to be compared with the idsInFillOrder
+     * @return True if combination Furniture does not contain existing IDs, else false if it does find one
+     */
     public boolean checkExistingCombination(Furniture[] combination){
         for(int i = 0; i<idsInFillOrder.size();i++){
             if(idsInFillOrder.get(i).equals("null")){

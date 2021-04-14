@@ -4,11 +4,11 @@ Faculty Name:
 Contact:
 Date
 
-Original Request: Study Lamp, 3
+Original Request: Mesh Chair, 1
 
 Items Ordered
-ID: L223
-ID: L980
-ID: L928
+ID: C9890
+ID: C6748
+ID: C8138
 
-Total Price: $14
+Total Price: $200
