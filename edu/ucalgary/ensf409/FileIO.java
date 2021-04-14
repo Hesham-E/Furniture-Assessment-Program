@@ -17,8 +17,11 @@ import java.io.*;
  *                              if false, display failure message to the terminal
  */
 public class FileIO {
-
-        Pattern pattern = Pattern.compile("(\\w+) (\\w+), (\\d+)");
+    /**
+     * Data members:
+     * PATTERN: Pattern        - Regex Pattern complied to test for user input
+     */
+        private final Pattern PATTERN = Pattern.compile("(\\w+) (\\w+), (\\d+)");
         /**
          * inputFetching method
          * prints instructions and examples to the terminal
@@ -44,13 +47,12 @@ public class FileIO {
             System.out.println();
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)); 
             String input = reader.readLine();
-            Matcher matches = pattern.matcher(input);
+            Matcher matches = PATTERN.matcher(input);
             if(!matches.matches()){
                 String[] invalid = {"null"};
                 return invalid;
             }
             String category = matches.group(2).toLowerCase();
-            System.out.println(category.equals("chair"));
             if((category.equals("lamp"))||(category.equals("chair"))||(category.equals("filing"))||(category.equals("desk"))){
                 String [] order = {matches.group(1), matches.group(2), matches.group(3)};
                 System.out.println();
