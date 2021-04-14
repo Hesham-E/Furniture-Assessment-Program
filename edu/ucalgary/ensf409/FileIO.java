@@ -126,6 +126,7 @@ public class FileIO {
                 System.out.println("     - For Office Furnishings in AB, call: 587-890-4387" );
                 System.out.println("     - For Furniture Goods in SK, call: 306-512-5508" );
                 System.out.println("     - For Fine Office Supplies in AB, call: 403-980-9876" );
+                
                 if (clientOrder[1].toLowerCase().equals("chair"))
                 {
                     System.out.println("     - For Chairs R Us in ON, call: 705-667-9481" );

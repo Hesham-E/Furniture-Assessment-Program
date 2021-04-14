@@ -12,7 +12,7 @@ package edu.ucalgary.ensf409;
 
 /**
  * to run the program: 
- * Move to the directory of the edu/ucalgary/ensf409 package
+ * Move to the directly local with edu
  * Use the following two commands in the terminal of your choice
  * to compile (windows):
  *           javac -cp .;lib/mysql-connector-java-8.0.23.jar edu/ucalgary/ensf409/Main.java

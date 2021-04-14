@@ -10,9 +10,23 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
+/**
+ * DatabaseTest.java for ENSF409 final project W2021
+ * Unit tests for Database.java class
+ * @author Josh Vanderstoop <a href="mailto:joshua.vanderstoop@ucalgary.ca">joshua.vanderstoop@ucalgary.ca</a>
+ * @author Faisal Hossain <a href="mailto:faisal.hossain1@ucalgary.ca">faisal.hossain1@ucalgary.ca</a>
+ * @author Hesham Elkaliouby <a href="mailto:hesham.elkaliouby@ucalgary.ca">hesham.elkaliouby@ucalgary.ca</a>
+ * @author Dagvadorj Altankhuyag <a href="mailto:dagvadorj.altankhuya@ucalgary.ca">dagvadorj.altankhuya@ucalgary.ca</a>
+ * @version 1.2
+ * @since 1.0
+ */
 
 public class DatabaseTest
 {
+    /**
+     * testConstructor() method
+     * A constructor test to see if members are initalized correctly
+     */
     @Test
     public void testConstructor ()
     {
@@ -23,6 +37,10 @@ public class DatabaseTest
         assertTrue("Database members initialized incorrectly", Arrays.equals(recieved, expected));
     }
 
+    /**
+     * testConnection() method
+     * Checks if the connection object properly logged in
+     */
     @Test
     public void testConnection () throws SQLException
     {
@@ -31,6 +49,10 @@ public class DatabaseTest
         assertTrue("Connection not properly initialized",  test.getConnect().isValid(1) == true);
     }
 
+    /**
+     * testConnection() method
+     * Checks if the connection object properly logged in
+     */
     @Test
     public void testFindUsedFurniture ()
     {
@@ -51,6 +73,10 @@ public class DatabaseTest
         assertTrue("Unexpected furniture items or information recieved", status);
     }
 
+    /**
+     * testRemoveFurniture() method
+     * Ensures that a furniture item is properly removed based on ID
+     */
     @Test
     public void testRemoveFurniture () throws SQLException
     {
@@ -65,6 +91,11 @@ public class DatabaseTest
         statment.close();
     }
 
+     /**
+     * testPrintManufacturers() method
+     * Ensures that manufactuers for an item that is out of stock
+     * are properly printed
+     */
     @Test
     public void testPrintManufacturers ()
     {
