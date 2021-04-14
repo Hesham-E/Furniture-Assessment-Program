@@ -5,11 +5,9 @@ import static org.junit.Assert.assertTrue;
 import java.io.IOException;
 import java.util.Arrays;
 
-import javax.print.DocFlavor.READER;
 
 import org.junit.Test;
 
-//NOT COMPLETED!!!
 public class FileIOTest
 {
     @Test

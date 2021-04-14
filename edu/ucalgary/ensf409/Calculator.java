@@ -55,7 +55,6 @@ public class Calculator extends Database {
         }
         this.orderQuantity = quantity;
         this.inInventory = super.findUsedFurniture(request[0], request[1], quantity);
-        // Arrays.sort(this.inInventory);
     }
     /**
      * Calculates and finds all the combinations of the inventory. After doing this, it checks if it fits the client order. If it doesn't, then return false, else return true.
@@ -142,7 +141,7 @@ public class Calculator extends Database {
         this.lowestPrice = lowestprice.toArray(new Furniture[lowestprice.size()]);
     }
     /**
-     * Checks if the currentCombination data member is fullfing the client order, else it will return false
+     * Checks if the currentCombination data member is fulfilling the client order, else it will return false
      * @param array boolean Array to be checked
      * @return returns true if every boolean value is true, else returns false
      */

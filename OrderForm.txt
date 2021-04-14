@@ -7,8 +7,8 @@ Date
 Original Request: Standing Desk, 2
 
 Items Ordered
-ID: D2341
 ID: D1927
+ID: D2341
 ID: D3820
 ID: D4438
 
