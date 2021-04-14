@@ -20,7 +20,7 @@ public class Calculator extends Database {
      * inInventory: Furniture[]             - will be filled with every piece of furniture in 
      *                                          the database that matches the type and category as 
      *                                          requested 
-     * possibleCombinations: List<Furniture[]  - rows will each be a set of Furniture picked from 
+     * possibleCombinations: List<Furniture[]>  - rows will each be a set of Furniture picked from 
      *                                          inInventory, which may or may not fill the order.
      *                                          The row that fills the order in the cheapest way 
      *                                          possible will be given to lowestPrice
@@ -41,7 +41,7 @@ public class Calculator extends Database {
     public int counter = 0;
     public List<Furniture[]> possibleCombinations = new ArrayList<Furniture[]>();
     public Calculator(String[] request) {
-        super("jdbc:mysql://localhost/INVENTORY", "Username", "Password");
+        super("jdbc:mysql://localhost/INVENTORY", "root", "1234");
         super.initializeConnection(); 
         int quantity=0;
         try {

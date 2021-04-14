@@ -5,10 +5,22 @@ import org.junit.*;
 import java.util.*;
 import java.util.ArrayList;
 
-
+/**
+ * CalculatorTest.java for ENSF409 final project W2021
+ * Unit tests for Calculator.java class
+ * @author Josh Vanderstoop <a href="mailto:joshua.vanderstoop@ucalgary.ca">joshua.vanderstoop@ucalgary.ca</a>
+ * @author Faisal Hossain <a href="mailto:faisal.hossain1@ucalgary.ca">faisal.hossain1@ucalgary.ca</a>
+ * @author Hesham Elkaliouby <a href="mailto:hesham.elkaliouby@ucalgary.ca">hesham.elkaliouby@ucalgary.ca</a>
+ * @author Dagvadorj Altankhuyag <a href="mailto:dagvadorj.altankhuya@ucalgary.ca">dagvadorj.altankhuya@ucalgary.ca</a>
+ * @version 1.2
+ * @since 1.0
+ */
 public class CalculatorTest
 {
     /**
+     * testConstructorCheckInventory() method
+     * A constructor test to see if object initalized correctly
+     * and found the only two kneeling chairs in the system
      * Tests if the Constructor and inInventory data member was properly applied
      */
     @Test
@@ -25,6 +37,7 @@ public class CalculatorTest
         assertTrue("Kneeling chairs were not found in inventory", 
                     Arrays.equals(recieved.toArray(), expectedID));
     }
+
     /**
      * Tests the ifFilled function
      * Tests the ifFilled function with a combination that should be true, where the currentFurntiure combination does meet the client order requirements
@@ -46,6 +59,7 @@ public class CalculatorTest
         boolean expected = true;
         assertTrue("ifFilled Test failed", test.ifFilled() == expected);
     }
+    
     /**
      * Tests the ifFilled function
      * Tests the ifFilled function with a combination that should be true, where the currentFurntiure combination does meet the client order requirements
@@ -69,7 +83,8 @@ public class CalculatorTest
         boolean expected = true;
         assertTrue("ifFilled2 Test failed", test.ifFilled() == expected);
     }
-   /**
+
+    /**
      * Tests the ifFilled function
      * Tests the ifFilled function with a combination that should be false, where the currentFurntiure combination does not meet the client order requirements
      * In this example, the furntiure combination of furniture1, furniture2, furniture3 does not meet the client order requirements because
@@ -92,6 +107,7 @@ public class CalculatorTest
         boolean expected = false;
         assertTrue("ifFilled2 Test failed", test.ifFilled() == expected);
     }
+
     /**
      * Tests the ifFilled function
      * Tests the ifFilled function with a combination that should be false, where the currentFurntiure combination does not meet the client order requirements
@@ -115,6 +131,7 @@ public class CalculatorTest
         boolean expected = false;
         assertTrue("ifFilled3 Test failed", test.ifFilled() == expected);
     }
+
     /**
      * Tests the priceCalculator function and to see if it false, given that the parts in the inventory meet the client order.
      * In this example and with the sql file given to us, 2 Kneeling chairs was not able to be built 
@@ -130,6 +147,7 @@ public class CalculatorTest
 
         assertTrue("priceCalculator found an impossible combination", (recieved == expected));
     }
+
     /**
      * Tests the priceCalculator function and to see if it true, given that the parts in the inventory meet the client order.
      * In this example and with the sql file given to us, 1 Exective chair was able to be built 
@@ -137,8 +155,50 @@ public class CalculatorTest
     @Test
     public void testPriceCalculatorPossible ()
     {
-        //THIS ASSUMES DATABASE GIVEN IN ASSIGNMENT. If choosing another database, ensure that the values are able to be calculated
-        String[] request = {"Executive", "chair", "1"};
+        String[] request = {"Ergonomic", "chair", "1"};
+        Calculator test = new Calculator(request);
+        boolean recieved = test.priceCalculator();
+        boolean expected = true;
+
+        assertTrue("priceCalculator failed to find a possible combination", (recieved == expected));
+    }
+
+    /**
+     * testPriceCalculatorPossible2() method
+     * Tests how priceCalculator reacts to a possible combination of items
+     * This time the test requests multiple items
+     */
+    @Test
+    public void testPriceCalculatorPossible2 ()
+    {
+        String[] request = {"Desk", "lamp", "3"};
+        Calculator test = new Calculator(request);
+        boolean recieved = test.priceCalculator();
+        boolean expected = true;
+
+        assertTrue("priceCalculator failed to find a possible combination", (recieved == expected));
+    }
+
+     /**
+     * testPriceCalculatorPossible3() method
+     * Tests how priceCalculator reacts to a possible combination of items
+     * This time the test requests multiple items and 'strange' capitalizations
+     */
+    public void testPriceCalculatorPossible3 ()
+    {
+        String[] request = {"StUdY", "LAMP", "2"};
+        Calculator test = new Calculator(request);
+        boolean recieved = test.priceCalculator();
+        boolean expected = true;
+
+        assertTrue("priceCalculator failed to find a possible combination", (recieved == expected));
+    }
+
+
+    @Test
+    public void testPriceCalculatorPossibleCheckCases ()
+    {
+        String[] request = {"Large", "filing", "1"};
         Calculator test = new Calculator(request);
         boolean recieved = test.priceCalculator();
         boolean expected = true;
