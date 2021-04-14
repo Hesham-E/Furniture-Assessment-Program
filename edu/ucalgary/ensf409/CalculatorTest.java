@@ -38,69 +38,13 @@ public class CalculatorTest
     }
 
     /**
-     * testCombineArray2Args() method
-     * Tests the method combinedArray2Args which performs
-     * index-wise OR operation across two boolean arrays
-     */
-    @Test
-    public void testCombineArray2Args ()
-    {
-        String[] request = {"Kneeling", "chair", "2"};
-        Calculator test = new Calculator(request);
-        boolean[] arr1 = {true, false, false};
-        boolean[] arr2 = {true, true, true};
-        boolean[] recieved = test.combineArray(arr1, arr2);
-        boolean[] expected = {true, true, true};
-
-        assertTrue("Boolean arrays compared improperly", Arrays.equals(recieved, expected));
-    }
-
-     /**
-     * testCombineArray3Args() method
-     * Tests the method combineArray3Args which performs
-     * index-wise OR operation across three boolean arrays
-     */
-    @Test
-    public void testCombineArray3Args ()
-    {
-        String[] request = {"Kneeling", "chair", "2"};
-        Calculator test = new Calculator(request);
-        boolean[] arr1 = {true, false, false, false};
-        boolean[] arr2 = {true, false, true, false};
-        boolean[] arr3 = {false, false, false, false};
-        boolean[] recieved = test.combineArray(arr1, arr2, arr3);
-        boolean[] expected = {true, false, true, false};
-
-        assertTrue("Boolean arrays compared improperly", Arrays.equals(recieved, expected));
-    }
-
-    /**
-     * testCombineArray4Args() method
-     * Tests the method combineArray4Args which performs
-     * index-wise OR operation across four boolean arrays
-     */
-    @Test
-    public void testCombineArray4Args ()
-    {
-        String[] request = {"Kneeling", "chair", "2"};
-        Calculator test = new Calculator(request);
-        boolean[] arr1 = {true, false, false, false};
-        boolean[] arr2 = {true, false, true, false};
-        boolean[] arr3 = {false, false, false, false};
-        boolean[] arr4 = {false, true, false, true};
-        boolean[] recieved = test.combineArray(arr1, arr2, arr3, arr4);
-        boolean[] expected = {true, true, true, true};
-
-        assertTrue("Boolean arrays compared improperly", Arrays.equals(recieved, expected));
-    }
-
-    /**
      * testPriceCalculatorNotPossible() method
      * Tests how priceCalculator reacts to an impossible combination of items
      */
     @Test
     public void testPriceCalculatorNotPossible ()
     {
+        //THIS ASSUMES DATABASE GIVEN IN ASSIGNMENT. If choosing another database, ensure that the values are not able to be calculated
         String[] request = {"Kneeling", "chair", "2"};
         Calculator test = new Calculator(request);
         boolean recieved = test.priceCalculator();
@@ -141,14 +85,25 @@ public class CalculatorTest
     }
 
      /**
-     * testPriceCalculatorPossible2() method
+     * testPriceCalculatorPossible3() method
      * Tests how priceCalculator reacts to a possible combination of items
      * This time the test requests multiple items and 'strange' capitalizations
      */
+    public void testPriceCalculatorPossible3 ()
+    {
+        String[] request = {"StUdY", "LAMP", "2"};
+        Calculator test = new Calculator(request);
+        boolean recieved = test.priceCalculator();
+        boolean expected = true;
+
+        assertTrue("priceCalculator failed to find a possible combination", (recieved == expected));
+    }
+
+
     @Test
     public void testPriceCalculatorPossibleCheckCases ()
     {
-        String[] request = {"StUdY", "LAMP", "2"};
+        String[] request = {"Large", "filing", "1"};
         Calculator test = new Calculator(request);
         boolean recieved = test.priceCalculator();
         boolean expected = true;

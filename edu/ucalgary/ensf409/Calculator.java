@@ -8,7 +8,7 @@ import java.util.List;
  * @author Faisal Hossain <a href="mailto:faisal.hossain1@ucalgary.ca">faisal.hossain1@ucalgary.ca</a>
  * @author Hesham Elkaliouby <a href="mailto:hesham.elkaliouby@ucalgary.ca">hesham.elkaliouby@ucalgary.ca</a>
  * @author Dagvadorj Altankhuyag <a href="mailto:dagvadorj.altankhuya@ucalgary.ca">dagvadorj.altankhuya@ucalgary.ca</a>
- * @version 1.4
+ * @version 1.6
  * @since 1.0
  * contains several methods to obtain information from the database
  * and calculate the cheapest option for the clients request.
@@ -20,8 +20,6 @@ public class Calculator extends Database {
      * inInventory: Furniture[]             - will be filled with every piece of furniture in 
      *                                          the database that matches the type and category as 
      *                                          requested 
-     * fillOrder: Furniture[][]               - contains the order that was placed by the user, 
-     *                                          the length of which is the quantity requested
      * possibleCombinations: List<Furniture[]>  - rows will each be a set of Furniture picked from 
      *                                          inInventory, which may or may not fill the order.
      *                                          The row that fills the order in the cheapest way 
@@ -32,17 +30,14 @@ public class Calculator extends Database {
      * pricesTotal: ArrayList<Integer>         - ArrayList of the PriceTotals for each combination found
      * 
      * sortedArray: int[]                       - Array of sorted PriceTotals from ArrayList
-     * insertedItems: int                       - int Index for how much items has been inserted into the fillOrder data member
      * counter: int                             - Counter that is used to check every possible combination to fulfill the client's order
-     * idsInFillOrder: ArrayList<String>        - String ArrayList of String id's parts that is already added into the fillOrder 2d array, to prevent duplicates in the same order 
      */
     public Furniture[] lowestPrice;
     public Furniture[] inInventory; 
-    public Furniture[][] fillOrder;
-    public ArrayList<String> idsInFillOrder = new ArrayList<String>();
     public ArrayList<Integer> pricesTotal = new ArrayList<Integer>();
     public int[] sortedArray;
-    public int insertedItems = 0;
+    public ArrayList<Furniture> currentFurniture = new ArrayList<Furniture>();
+    public int orderQuantity;
     public int counter = 0;
     public List<Furniture[]> possibleCombinations = new ArrayList<Furniture[]>();
     public Calculator(String[] request) {
@@ -58,9 +53,9 @@ public class Calculator extends Database {
             System.out.println("Sorry, the quanity you have requested is not a real number.");
             System.exit(0);
         }
+        this.orderQuantity = quantity;
         this.inInventory = super.findUsedFurniture(request[0], request[1], quantity);
-        Arrays.sort(this.inInventory);
-        this.fillOrder = new Furniture[quantity][3];
+        // Arrays.sort(this.inInventory);
     }
     /**
      * Calculates and finds all the combinations of the inventory. After doing this, it checks if it fits the client order. If it doesn't, then return false, else return true.
@@ -73,279 +68,35 @@ public class Calculator extends Database {
         if(inInventory.length == 0){
             return false;
         }
-        // If there only one item in the inventory, then check if that item fits the client order requirements
-        if(inInventory.length == 1){
-            if((inInventory[0].isFilled()) && (fillOrder.length == 1)){
-                Furniture dummy = new Furniture(new String(inInventory[0].getType()), new String(inInventory[0].category));
-                fillOrder[0][0] = inInventory[0];
-                fillOrder[0][1] = dummy;
-                fillOrder[0][2] = dummy;
-                fillOrder[0][3] = dummy;
-                return true;
-            }
-            else{
-                return false;
+        for(int i = 0; i<inInventory.length;i++){
+            currentFurniture.add(inInventory[i]);
+            counter = i + 1;
+            for(int j = i + 1; j<=inInventory.length;j++){
+                if(ifFilled()){
+                    possibleCombinations.add(currentFurniture.toArray(new Furniture[currentFurniture.size()]));
+                }
+                if(counter == inInventory.length){
+                    currentFurniture = new ArrayList<Furniture>();
+                    break;
+                }
+                if(j == inInventory.length){
+                    currentFurniture = new ArrayList<Furniture>();
+                    currentFurniture.add(inInventory[i]);
+                    j = counter;
+                    counter++;
+                    continue;
+                }
+                currentFurniture.add(inInventory[j]);
             }
         }
-        // find all possible combinations of the order using a brute force algorithm
-        if(inInventory[0].category.equals("lamp")){
-            Furniture dummy = new Furniture(new String(inInventory[0].getType()), new String(inInventory[0].category));
-            for(int i = 0; i<inInventory.length;i++){
-                boolean[] boolArray = {inInventory[i].getBool(0), inInventory[i].getBool(1)};
-                if(ifFilled(boolArray)){
-                    addToCombinations(inInventory[i], dummy, dummy, dummy);
-                }
-                for(int j = i+1; j<inInventory.length; j++){
-                    boolean[] boolArray1 = {inInventory[i].getBool(0), inInventory[i].getBool(1)};
-                    boolean[] boolArray2 = {inInventory[j].getBool(0), inInventory[j].getBool(1)};
-                    boolean[] combinedBool = combineArray(boolArray1, boolArray2);
-                    if(ifFilled(combinedBool)){
-                        addToCombinations(inInventory[i], inInventory[j], dummy, dummy);
-                    }
-                }
-            }
-            // if there are no possible combinations, return false
-            if(possibleCombinations.size() == 0){
-                return false;
-            }
-            // if the possible combinations found is less than the client order length, return false
-            else if(possibleCombinations.size() < fillOrder.length){
-                return false;
-            }
-            else{
-                calculatePricesTotal();
-                for(int i = 0; i<=sortedArray.length;i++){
-                    if(insertedItems == fillOrder.length){
-                        break;
-                    }
-                    if(counter == sortedArray.length){
-                        break;
-                    } 
-                    if((i == sortedArray.length) && (insertedItems < fillOrder.length)){
-                        idsInFillOrder = new ArrayList<String>();
-                        i = counter;
-                        counter++;
-                        insertedItems = 0;
-                        continue;
-                    }
-                    insertItems(sortedArray[i], insertedItems);
-                }
-                if(insertedItems < fillOrder.length){
-                    return false;
-                }
-                combinationsToLowestPrice();
-                return true;
-            }
+        if(possibleCombinations.size() == 0){
+            return false;
         }
-        // Brute force algorithm for chair
-        else if(inInventory[0].category.equals("chair")){
-            Furniture dummy = new Furniture(new String(inInventory[0].getType()), new String(inInventory[0].category));
-            for(int i = 0; i<inInventory.length;i++){
-                boolean[] boolArray = {inInventory[i].getBool(0), inInventory[i].getBool(1),inInventory[i].getBool(2),inInventory[i].getBool(3)};
-                if(ifFilled(boolArray)){
-                    addToCombinations(inInventory[i], dummy, dummy, dummy);
-                }
-                for(int j = i+1; j<inInventory.length; j++){
-                    boolean[] boolArray1 = {inInventory[i].getBool(0), inInventory[i].getBool(1),inInventory[i].getBool(2),inInventory[i].getBool(3)};
-                    boolean[] boolArray2 = {inInventory[j].getBool(0), inInventory[j].getBool(1),inInventory[j].getBool(2),inInventory[j].getBool(3)};
-                    boolean[] combinedBool = combineArray(boolArray1, boolArray2);
-                    if(ifFilled(combinedBool)){
-                        addToCombinations(inInventory[i], inInventory[j], dummy, dummy);
-                    }
-                    for(int k = j+1; k<inInventory.length;k++){
-                        boolean[] boolArray3 = {inInventory[i].getBool(0), inInventory[i].getBool(1),inInventory[i].getBool(2),inInventory[i].getBool(3)};
-                        boolean[] boolArray4 = {inInventory[j].getBool(0), inInventory[j].getBool(1),inInventory[j].getBool(2),inInventory[j].getBool(3)};
-                        boolean[] boolArray5 = {inInventory[k].getBool(0), inInventory[k].getBool(1),inInventory[k].getBool(2),inInventory[k].getBool(3)};
-                        boolean[] combinedArray2 = combineArray(boolArray3, boolArray4, boolArray5);
-                        if(ifFilled(combinedArray2)){
-                            addToCombinations(inInventory[i], inInventory[j], inInventory[k], dummy);
-                        }
-                        for(int l = k+1; l<inInventory.length;l++){
-                            boolean[] boolArray6 = {inInventory[i].getBool(0), inInventory[i].getBool(1),inInventory[i].getBool(2),inInventory[i].getBool(3)};
-                            boolean[] boolArray7 = {inInventory[j].getBool(0), inInventory[j].getBool(1),inInventory[j].getBool(2),inInventory[j].getBool(3)};
-                            boolean[] boolArray8 = {inInventory[k].getBool(0), inInventory[k].getBool(1),inInventory[k].getBool(2),inInventory[k].getBool(3)};
-                            boolean[] boolArray9 = {inInventory[l].getBool(0), inInventory[l].getBool(1),inInventory[l].getBool(2),inInventory[l].getBool(3)};
-                            boolean[] combinedArray3 = combineArray(boolArray6, boolArray7, boolArray8, boolArray9);
-                            if(ifFilled(combinedArray3)){
-                                addToCombinations(inInventory[i], inInventory[j], inInventory[k], inInventory[l]);
-                            }
-                        }
-                    }
-
-                }
-            }
-            // if there are no possible combinations, return false
-            if(possibleCombinations.size() == 0){
-                return false;
-            }
-            // if the possible combinations found is less than the client order length, return false
-            else if(possibleCombinations.size() < fillOrder.length){
-                return false;
-            }
-            else{
-                calculatePricesTotal();
-                for(int i = 0; i<=sortedArray.length;i++){
-                    if(insertedItems == fillOrder.length){
-                        break;
-                    }
-                    if(counter == sortedArray.length){
-                        break;
-                    } 
-                    if((i == sortedArray.length) && (insertedItems < fillOrder.length)){
-                        idsInFillOrder = new ArrayList<String>();
-                        i = counter;
-                        counter++;
-                        insertedItems = 0;
-                        continue;
-                    }
-                    insertItems(sortedArray[i], insertedItems);
-                }
-                if(insertedItems < fillOrder.length){
-                    return false;
-                }
-                combinationsToLowestPrice();
-                return true;
-            }
-        }
-        // Brute force algorithm for filing and desk
         else{
-            Furniture dummy = new Furniture(new String(inInventory[0].getType()), new String(inInventory[0].category));
-            for(int i = 0; i<inInventory.length;i++){
-                boolean[] boolArray = {inInventory[i].getBool(0), inInventory[i].getBool(1),inInventory[i].getBool(2)};
-                if(ifFilled(boolArray)){
-                    addToCombinations(inInventory[i], dummy, dummy, dummy);
-                }
-                for(int j = i+1; j<inInventory.length; j++){
-                    boolean[] boolArray1 = {inInventory[i].getBool(0), inInventory[i].getBool(1),inInventory[i].getBool(2)};
-                    boolean[] boolArray2 = {inInventory[j].getBool(0), inInventory[j].getBool(1),inInventory[j].getBool(2)};
-                    boolean[] combinedBool = combineArray(boolArray1, boolArray2);
-                    if(ifFilled(combinedBool)){
-                        addToCombinations(inInventory[i], inInventory[j], dummy, dummy);
-                    }
-                    for(int k = j+1; k<inInventory.length;k++){
-                        boolean[] boolArray3 = {inInventory[i].getBool(0), inInventory[i].getBool(1),inInventory[i].getBool(2)};
-                        boolean[] boolArray4 = {inInventory[j].getBool(0), inInventory[j].getBool(1),inInventory[j].getBool(2)};
-                        boolean[] boolArray5 = {inInventory[k].getBool(0), inInventory[k].getBool(1),inInventory[k].getBool(2)};
-                        boolean[] combinedArray2 = combineArray(boolArray3, boolArray4, boolArray5);
-                        if(ifFilled(combinedArray2)){
-                            addToCombinations(inInventory[i], inInventory[j], inInventory[k], dummy);
-                        }
-                    }
-
-                }
-            }
-            // if there are no possible combinations, return false
-            if(possibleCombinations.size() == 0){
-                return false;
-            }
-            // if the possible combinations found is less than the client order length, return false
-            else if(possibleCombinations.size() < fillOrder.length){
-                return false;
-            }
-            else{
-                calculatePricesTotal();
-                for(int i = 0; i<=sortedArray.length;i++){
-                    if(insertedItems == fillOrder.length){
-                        break;
-                    }
-                    if(counter == sortedArray.length){
-                        break;
-                    } 
-                    if((i == sortedArray.length) && (insertedItems < fillOrder.length)){
-                        idsInFillOrder = new ArrayList<String>();
-                        i = counter;
-                        counter++;
-                        insertedItems = 0;
-                        continue;
-                    }
-                    insertItems(sortedArray[i], insertedItems);
-                }
-                if(insertedItems < fillOrder.length){
-                    return false;
-                }
-                combinationsToLowestPrice();
-                return true;
-            }
-
+            calculatePricesTotal();
+            combinationsToLowestPrice();
         }
-    }
-    /**
-     * Combines two boolean arrays into one boolean array by ORing the two arrays.
-     * @param array1 - boolean array that consists of the first item
-     * @param array2 - boolean array that consists of the Second item
-     * @return boolean array that is the result of oring the arrays
-     */
-    public boolean[] combineArray(boolean[] array1, boolean[]array2){
-        boolean[] newBool = new boolean[array1.length];
-        for(int i = 0; i<array1.length;i++){
-            if(array1[i] || array2[i]){
-                newBool[i] = true;
-            }
-            else{
-                newBool[i] = false;
-            }
-        }
-        return newBool;
-    }
-    /**
-     * Dulipicate combineArray Function with three arguments
-     * @param array1  boolean array that consists of the first item
-     * @param array2  boolean array that consists of the Second item
-     * @param array3  boolean array that consists of the Third item
-     * @return boolean array that is the result of oring the arrays
-     */
-    public boolean[] combineArray(boolean[] array1, boolean[]array2, boolean[]array3 ){
-        boolean[] newBool = new boolean[array1.length];
-        for(int i = 0; i<array1.length;i++){
-            if(array1[i] || array2[i] || array3[i]){
-                newBool[i] = true;
-            }
-            else{
-                newBool[i] = false;
-            }
-        }
-        return newBool;
-    }
-    /**
-     * Dulipicate combineArray Function with four arguments
-     * @param array1 boolean array that consists of the first item
-     * @param array2 boolean array that consists of the Second item
-     * @param array3 boolean array that consists of the Third item
-     * @param array4 boolean array that consists of the Fourth item
-     * @return boolean array that is the result of oring the arrays
-     */
-    public boolean[] combineArray(boolean[] array1, boolean[]array2, boolean[]array3, boolean[]array4){
-        boolean[] newBool = new boolean[array1.length];
-        for(int i = 0; i<array1.length;i++){
-            if(array1[i] || array2[i] || array3[i] || array4[i]){
-                newBool[i] = true;
-            }
-            else{
-                newBool[i] = false;
-            }
-        }
-        return newBool;
-    }
-    /**
-     * adds a possible Combination to possibleCombinations class variable.
-     * @param item1 first Furniture Item to be added
-     * @param item2 second Furniture Item to be added
-     * @param item3 third Furniture Item to be added
-     * @param item4 third Furniture Item to be added
-     */
-    public void addToCombinations(Furniture item1, Furniture item2, Furniture item3, Furniture item4){
-            possibleCombinations.add(new Furniture[] {item1, item2, item3, item4});
-    }
-    /**
-     * prints out all possible combinations in the possibleCombinations 2d array. priceCalculator has to be run first.
-     */
-    public void printCombinations(){
-        for(int i = 0; i<possibleCombinations.size();i++){
-            System.out.print(possibleCombinations.get(i)[0].getID() + ", ");
-            System.out.print(possibleCombinations.get(i)[1].getID() + ", ");
-            System.out.print(possibleCombinations.get(i)[2].getID() + ", ");
-            System.out.println(possibleCombinations.get(i)[3].getID());
-        }
+        return true;
     }
     /**
      * Calculates the total price of every combination found in possibleCombinations 
@@ -356,10 +107,8 @@ public class Calculator extends Database {
     public void calculatePricesTotal(){
         for(int i = 0;i<possibleCombinations.size();i++){
             int sum = 0;
-            for(int j = 0; j<4;j++){
-                if(possibleCombinations.get(i)[j].getPrice() != -1){
-                    sum += possibleCombinations.get(i)[j].getPrice();
-                }
+            for(int j = 0; j<possibleCombinations.get(i).length;j++){
+                sum += possibleCombinations.get(i)[j].getPrice();
             }
             pricesTotal.add(sum);
         }
@@ -378,90 +127,115 @@ public class Calculator extends Database {
         return returnInt;
     }
     /**
-     * Loops through the pricesTotal array to check if the sum from the sortedArray is equal to the pricesTotal ArrayList that has the exact index
-     * of the corresponding combination
-     * If it found, then add the combination to the fillOrder array 
-     * @param sum Sum of a combination from sortedArray
-     * @param index index of the fillOrder to be inserted to fillOrder
-     */
-    public void insertItems(int sum, int index){
-        for(int i = 0; i<pricesTotal.size();i++){
-            if(sum == pricesTotal.get(i)){
-                if(checkExistingCombination(possibleCombinations.get(i))){
-                    fillOrder[index] = possibleCombinations.get(i);
-                    insertedItems++;
-                    return;
-                }
-            }
-        }
-    }
-    /**
-     * Void Function that adds all combinations to lowestprice in a single array
+     * Void Function that adds the lowest price Combination from possibleCombinations to lowestprice data member in a single array
      */
     public void combinationsToLowestPrice(){
         ArrayList<Furniture> lowestprice = new ArrayList<Furniture>();
-        for(int i = 0; i<fillOrder.length; i++){
-            for(int j = 0; j<4;j++){
-                if(fillOrder[i][j].getPrice() != -1){
-                    lowestprice.add(fillOrder[i][j]);
+        for(int i = 0; i<pricesTotal.size(); i++){
+            if(pricesTotal.get(i) == sortedArray[0]){
+                for(int j = 0; j<possibleCombinations.get(i).length;j++){
+                    lowestprice.add(possibleCombinations.get(i)[j]);
                 }
+                break;
             }
         }
         this.lowestPrice = lowestprice.toArray(new Furniture[lowestprice.size()]);
     }
     /**
-     * Getter function that returns the fillOrder of the client, that is a 2D Furniture array of items
-     * @return returns 2D array of the fillOrder of the cilent
-     */
-    public Furniture[][] getFillOrder()
-    {
-        return this.fillOrder; 
-    }
-    /**
-     * Checks if the all values of a boolean array is true, else return false
+     * Checks if the currentCombination data member is fullfing the client order, else it will return false
      * @param array boolean Array to be checked
      * @return returns true if every boolean value is true, else returns false
      */
-    public boolean ifFilled(boolean[] array)
-    {
-    for(boolean b : array){
-        if(!b){
-            return false;
-        } 
-    }
-    return true;
-    }
-    /**
-     * Method that checks existing IDs in a previous to prevent duplicate ID orders to the Furniture combination argument. Returns true if
-     * existing IDs were not found in the idsInFillOrder and adds the current combination ID's part into the idsInFillOrder arraylist.  
-     * @param combination Combination to be compared with the idsInFillOrder
-     * @return True if combination Furniture does not contain existing IDs, else false if it does find one
-     */
-    public boolean checkExistingCombination(Furniture[] combination){
-        for(int i = 0; i<idsInFillOrder.size();i++){
-            if(idsInFillOrder.get(i).equals("null")){
-                return false;
+    public boolean ifFilled(){
+        if(inInventory[0].category.equals("filing")){
+            int bool1 = 0;
+            int bool2 = 0;
+            int bool3 = 0;
+            for(int i = 0; i<currentFurniture.size();i++){
+                if(currentFurniture.get(i).getBool(0)){
+                    bool1++;
+                }
+                if(currentFurniture.get(i).getBool(1)){
+                    bool2++;
+                }
+                if(currentFurniture.get(i).getBool(2)){
+                    bool3++;
+                }
             }
-            if(idsInFillOrder.get(i).equals(combination[0].getID())){
-                return false;
+            if((bool1 >= orderQuantity) &&(bool2 >= orderQuantity)&&(bool3 >= orderQuantity)){
+                return true;
             }
-            if(idsInFillOrder.get(i).equals(combination[1].getID())){
-                return false;
-            }
-            if(idsInFillOrder.get(i).equals(combination[2].getID())){
-                return false;
-            }
-            if(idsInFillOrder.get(i).equals(combination[3].getID())){
+            else{
                 return false;
             }
         }
-        for(int i = 0;i<combination.length;i++){
-            if(combination[i].getID().equals("null")){
-                continue;
+        if(inInventory[0].category.equals("lamp")){
+            int bool1 = 0;
+            int bool2 = 0;
+            for(int i = 0; i<currentFurniture.size();i++){
+                if(currentFurniture.get(i).getBool(0)){
+                    bool1++;
+                }
+                if(currentFurniture.get(i).getBool(1)){
+                    bool2++;
+                }
             }
-            idsInFillOrder.add(combination[i].getID());
+            if((bool1 >= orderQuantity) &&(bool2 >= orderQuantity)){
+                return true;
+            }
+            else{
+                return false;
+            }
         }
-        return true;
+        if(inInventory[0].category.equals("desk")){
+            int bool1 = 0;
+            int bool2 = 0;
+            int bool3 = 0;
+            for(int i = 0; i<currentFurniture.size();i++){
+                if(currentFurniture.get(i).getBool(0)){
+                    bool1++;
+                }
+                if(currentFurniture.get(i).getBool(1)){
+                    bool2++;
+                }
+                if(currentFurniture.get(i).getBool(2)){
+                    bool3++;
+                }
+            }
+            if((bool1 >= orderQuantity) &&(bool2 >= orderQuantity)&&(bool3 >= orderQuantity)){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        if(inInventory[0].category.equals("chair")){
+            int bool1 = 0;
+            int bool2 = 0;
+            int bool3 = 0;
+            int bool4 = 0;
+            for(int i = 0; i<currentFurniture.size();i++){
+                if(currentFurniture.get(i).getBool(0)){
+                    bool1++;
+                }
+                if(currentFurniture.get(i).getBool(1)){
+                    bool2++;
+                }
+                if(currentFurniture.get(i).getBool(2)){
+                    bool3++;
+                }
+                if(currentFurniture.get(i).getBool(3)){
+                    bool4++;
+                }
+            }
+            if((bool1 >= orderQuantity) &&(bool2 >= orderQuantity)&&(bool3 >= orderQuantity)&&(bool4 >= orderQuantity)){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        return false;
     }
     
 }
