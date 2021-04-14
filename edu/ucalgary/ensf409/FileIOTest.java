@@ -58,46 +58,15 @@ public class FileIOTest
     }
 
      /**
-     * testFormattedFormOutput() method
+     * testFormattedFormOutput1() method
      * Tests how formattedFormOutput() prints to the console after user input
-     * In this test, the output is known based on the program's algorithim
-     * THIS TEST DEPENDS ON THE SPECIFIC CALCULATOR ALGORITHM AND SPECIFIC DATABASE
-     * PROVIDED. IF THESE TWO THINGS CHANGE THE TEST WILL FAIL
+     * The specific form of the output changes 
      */
     @Test
-    public void testFormattedFormOutput() throws IOException
+    public void testFormattedFormOutput1() throws IOException
     {
         FileIO test = new FileIO();
-        String[] request = {"Executive", "chair", "1"};
-        Calculator calc = new Calculator(request);
-
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        PrintStream original = System.out;
-        System.setOut(new PrintStream(outputStream));
-
-        test.formattedFormOutput(calc, request);
-        String expected = "yourorderhasbeenfilled,belowarethefurnitureitemsthathavebeenordered.ID:C2483,Price:175,ManufacuturerID:002ID:C5784,Price:150,ManufacuturerID:004ID:C7268,Price:75,ManufacuturerID:004";
-        expected = expected.replaceAll(" ", "").replaceAll("[\n\r]", "");
-        String recieved = outputStream.toString().replaceAll(" ", "").replaceAll("[\n\r]", "");
-        
-        System.out.flush();
-        System.setOut(original);
-
-        assertTrue("Output printed to console was that not of a successful order", expected.equals(recieved));
-    }
-
-     /**
-     * testFormattedFormOutput2() method
-     * Tests how formattedFormOutput() prints to the console after user input
-     * This time the test requests mutliple items and weird capitalization
-     * Since the specific form was checked in the last test, this time
-     * we only look for the IDs
-     */
-    @Test
-    public void testFormattedFormOutput2() throws IOException
-    {
-        FileIO test = new FileIO();
-        String[] request = {"tRaDiTiOnAl", "DESK", "2"};
+        String[] request = {"traditional", "DESK", "2"};
         Calculator calc = new Calculator(request);
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -114,11 +83,11 @@ public class FileIOTest
     }
 
      /**
-     * testFormattedFormOutput3() method
+     * testFormattedFormOutput2() method
      * Tests if user recieved the lowest price
      */
     @Test
-    public void testFormattedFormOutput3() throws IOException
+    public void testFormattedFormOutput2() throws IOException
     {
         FileIO test = new FileIO();
         String[] request = {"Adjustable", "DESK", "2"};

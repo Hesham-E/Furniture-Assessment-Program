@@ -50,8 +50,8 @@ public class DatabaseTest
     }
 
     /**
-     * testConnection() method
-     * Checks if the connection object properly logged in
+     * testFindUsedFurniture() method
+     * Checks if the specified number of furniture items was returned
      */
     @Test
     public void testFindUsedFurniture ()
@@ -59,6 +59,30 @@ public class DatabaseTest
         Database test = new Database("jdbc:mysql://localhost/INVENTORY", "scm", "ensf409");
         test.initializeConnection();
         Furniture[] recieved = test.findUsedFurniture("kneeling", "chair", 2);
+        Furniture[] expectedArr = {new Furniture("Kneeling", "chair", "C1320", true, false, false, false, 50, "002"),
+                                   new Furniture("Kneeling", "chair", "C3819", false, false, true, false, 75, "005")};
+        String[] expectedIDs = {"C1320", "C3819"};
+        boolean status = true;
+        for (int i = 0; i < expectedArr.length; i++)
+        {
+            if (!recieved[i].getID().equals(expectedIDs[i]))
+            {
+                status = false;
+            }
+        }
+        assertTrue("Unexpected furniture items or information recieved", status);
+    }
+
+     /**
+     * testFindUsedFurniture1() method
+     * Same as testFindUsedFurniture, but with weird capitalization on the letters
+     */
+    @Test
+    public void testFindUsedFurniture1 ()
+    {
+        Database test = new Database("jdbc:mysql://localhost/INVENTORY", "scm", "ensf409");
+        test.initializeConnection();
+        Furniture[] recieved = test.findUsedFurniture("kNeElInG", "ChAiR", 2);
         Furniture[] expectedArr = {new Furniture("Kneeling", "chair", "C1320", true, false, false, false, 50, "002"),
                                    new Furniture("Kneeling", "chair", "C3819", false, false, true, false, 75, "005")};
         String[] expectedIDs = {"C1320", "C3819"};
