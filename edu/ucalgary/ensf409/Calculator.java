@@ -41,7 +41,7 @@ public class Calculator extends Database {
     public int counter = 0;
     public List<Furniture[]> possibleCombinations = new ArrayList<Furniture[]>();
     public Calculator(String[] request) {
-        super("jdbc:mysql://localhost/INVENTORY", "root", "1234");
+        super("jdbc:mysql://localhost/INVENTORY", "scm", "ensf409");
         super.initializeConnection(); 
         int quantity=0;
         try {
