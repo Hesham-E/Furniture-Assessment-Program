@@ -61,6 +61,8 @@ public class FileIOTest
      * testFormattedFormOutput() method
      * Tests how formattedFormOutput() prints to the console after user input
      * In this test, the output is known based on the program's algorithim
+     * THIS TEST DEPENDS ON THE SPECIFIC CALCULATOR ALGORITHM AND SPECIFIC DATABASE
+     * PROVIDED. IF THESE TWO THINGS CHANGE THE TEST WILL FAIL
      */
     @Test
     public void testFormattedFormOutput() throws IOException
@@ -74,7 +76,7 @@ public class FileIOTest
         System.setOut(new PrintStream(outputStream));
 
         test.formattedFormOutput(calc, request);
-        String expected = "your order has been filled, below are the furniture items that have been ordered. ID: C7268, Price: 75, Manufacuturer ID: 004ID: C5784, Price: 150, Manufacuturer ID: 004ID: C2483, Price: 175, Manufacuturer ID: 002";
+        String expected = "yourorderhasbeenfilled,belowarethefurnitureitemsthathavebeenordered.ID:C2483,Price:175,ManufacuturerID:002ID:C5784,Price:150,ManufacuturerID:004ID:C7268,Price:75,ManufacuturerID:004";
         expected = expected.replaceAll(" ", "").replaceAll("[\n\r]", "");
         String recieved = outputStream.toString().replaceAll(" ", "").replaceAll("[\n\r]", "");
         
@@ -88,6 +90,8 @@ public class FileIOTest
      * testFormattedFormOutput2() method
      * Tests how formattedFormOutput() prints to the console after user input
      * This time the test requests mutliple items and weird capitalization
+     * Since the specific form was checked in the last test, this time
+     * we only look for the IDs
      */
     @Test
     public void testFormattedFormOutput2() throws IOException
@@ -106,7 +110,30 @@ public class FileIOTest
         System.out.flush();
         System.setOut(original);
 
-        assertTrue("Output printed to console was that not of a successful order", recieved.contains("D0890") && recieved.contains("D8675") && recieved.contains("D4231") && recieved.contains("D9352"));
+        assertTrue("Output printed to console was that not of a successful order", recieved.contains("D8675") && recieved.contains("D4231") && recieved.contains("D9352"));
+    }
+
+     /**
+     * testFormattedFormOutput3() method
+     * Tests if user recieved the lowest price
+     */
+    @Test
+    public void testFormattedFormOutput3() throws IOException
+    {
+        FileIO test = new FileIO();
+        String[] request = {"Adjustable", "DESK", "2"};
+        Calculator calc = new Calculator(request);
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream original = System.out;
+        System.setOut(new PrintStream(outputStream));
+
+        test.formattedFormOutput(calc, request);
+        
+        System.out.flush();
+        System.setOut(original);
+
+        assertTrue("Output printed to console was that not of a successful order", calc.pricesTotal.get(calc.pricesTotal.size() - 1) == 800);
     }
 }
 
