@@ -13,8 +13,6 @@ public class CalculatorTest
     {
         String[] request = {"Kneeling", "chair", "2"};
         Calculator test = new Calculator(request);
-        Furniture[] expectedArr = {new Furniture("Kneeling", "chair", "C1320", true, false, false, false, 50, "002"),
-                                   new Furniture("Kneeling", "chair", "C3819", false, false, true, false, 75, "005")};
         String[] expectedID = {"C1320", "C3819"};
         ArrayList<String> recieved = new ArrayList<String>();
         for (int i = 0; i < test.inInventory.length; i++)

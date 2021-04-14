@@ -89,6 +89,6 @@ public class Main {
          the database the calculator will pull information from */
         Calculator calculating = new Calculator(clientOrder);
         calculating.priceCalculator();
-        // inputOutput.formattedFormOutput(calculating, clientOrder); // see FileIO documentation
+        inputOutput.formattedFormOutput(calculating, clientOrder); // see FileIO documentation
     }
 }

@@ -20,8 +20,6 @@ public class Calculator extends Database {
      * inInventory: Furniture[]             - will be filled with every piece of furniture in 
      *                                          the database that matches the type and category as 
      *                                          requested 
-     * fillOrder: Furniture[][]               - contains the order that was placed by the user, 
-     *                                          the length of which is the quantity requested
      * possibleCombinations: List<Furniture[]  - rows will each be a set of Furniture picked from 
      *                                          inInventory, which may or may not fill the order.
      *                                          The row that fills the order in the cheapest way 
@@ -99,17 +97,6 @@ public class Calculator extends Database {
             combinationsToLowestPrice();
         }
         return true;
-    }
-    /**
-     * prints out all possible combinations in the possibleCombinations 2d array. priceCalculator has to be run first.
-     */
-    public void printCombinations(){
-        for(int i = 0; i<possibleCombinations.size();i++){
-            System.out.print(possibleCombinations.get(i)[0].getID() + ", ");
-            System.out.print(possibleCombinations.get(i)[1].getID() + ", ");
-            System.out.print(possibleCombinations.get(i)[2].getID() + ", ");
-            System.out.println(possibleCombinations.get(i)[3].getID());
-        }
     }
     /**
      * Calculates the total price of every combination found in possibleCombinations 
