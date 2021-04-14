@@ -56,53 +56,42 @@ public class FileIOTest
         System.setIn(original);
         assertTrue("Input recieved is different from expected", Arrays.equals(expected, recieved));
     }
-
-     /**
-     * testFormattedFormOutput1() method
-     * Tests how formattedFormOutput() prints to the console after user input
-     * The specific form of the output changes 
+    /**
+     * testInputFetching() method
+     * Tests how inputFetching() handles user input with a similar input to the valid input, except the category is not valid.
      */
     @Test
-    public void testFormattedFormOutput1() throws IOException
+    public void testInputFetching3() throws IOException
     {
         FileIO test = new FileIO();
-        String[] request = {"traditional", "DESK", "2"};
-        Calculator calc = new Calculator(request);
+        ByteArrayInputStream inputStream = new ByteArrayInputStream("mesh wheel, 10".getBytes());
+        InputStream original = System.in;
+        System.setIn(inputStream);
 
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        PrintStream original = System.out;
-        System.setOut(new PrintStream(outputStream));
+        String[] recieved = test.inputFetching();
+        String[] expected = {"null2", "wheel"};
 
-        test.formattedFormOutput(calc, request);
-        String recieved = outputStream.toString();
-        
-        System.out.flush();
-        System.setOut(original);
-
-        assertTrue("Output printed to console was that not of a successful order", recieved.contains("D8675") && recieved.contains("D4231") && recieved.contains("D9352"));
+        System.setIn(original);
+        assertTrue("Input recieved is different from expected", Arrays.equals(expected, recieved));
     }
-
-     /**
-     * testFormattedFormOutput2() method
-     * Tests if user recieved the lowest price
+    /**
+     * testInputFetching() method
+     * Tests how inputFetching() handles user input with a completely invalid input
      */
     @Test
-    public void testFormattedFormOutput2() throws IOException
+    public void testInputFetching4() throws IOException
     {
         FileIO test = new FileIO();
-        String[] request = {"Adjustable", "DESK", "2"};
-        Calculator calc = new Calculator(request);
 
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        PrintStream original = System.out;
-        System.setOut(new PrintStream(outputStream));
+        ByteArrayInputStream inputStream = new ByteArrayInputStream("mmmmmm".getBytes());
+        InputStream original = System.in;
+        System.setIn(inputStream);
 
-        test.formattedFormOutput(calc, request);
-        
-        System.out.flush();
-        System.setOut(original);
+        String[] recieved = test.inputFetching();
+        String[] expected = {"null"};
 
-        assertTrue("Output printed to console was that not of a successful order", calc.pricesTotal.get(calc.pricesTotal.size() - 1) == 800);
+        System.setIn(original);
+        assertTrue("Input recieved is different from expected", Arrays.equals(expected, recieved));
     }
 }
 

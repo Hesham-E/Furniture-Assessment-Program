@@ -6,7 +6,7 @@ package edu.ucalgary.ensf409;
  * @author Faisal Hossain <a href="mailto:faisal.hossain1@ucalgary.ca">faisal.hossain1@ucalgary.ca</a>
  * @author Hesham Elkaliouby <a href="mailto:hesham.elkaliouby@ucalgary.ca">hesham.elkaliouby@ucalgary.ca</a>
  * @author Dagvadorj Altankhuyag <a href="mailto:dagvadorj.altankhuya@ucalgary.ca">dagvadorj.altankhuya@ucalgary.ca</a>
- * @version 1.2
+ * @version 1.4
  * @since 1.0
  */
 
@@ -69,6 +69,8 @@ package edu.ucalgary.ensf409;
             System.out.println("One of your inputs was not correct, please restart the application and try again. Please ensure you type in the correct format as specified in the program");
             System.out.println("Example:");
             System.out.println("Mesh Chair, 1");
+            System.out.println("Hints: Is there a space between the comma and the number?");
+            System.out.println("Hints: No spaces allowed after the number");
             System.exit(0); 
         }
         // If the regex pattern was not matched, application will exit
@@ -77,6 +79,7 @@ package edu.ucalgary.ensf409;
             System.out.println("Example:");
             System.out.println("Mesh Chair, 1");
             System.out.println("Hints: Is there a space between the comma and the number?");
+            System.out.println("Hints: No spaces allowed after the number");
             System.exit(0); 
         }
         // if the category is not lamp, filing, desk or chair, application will exit

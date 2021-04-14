@@ -21,7 +21,7 @@ public class FileIO {
      * Data members:
      * PATTERN: Pattern        - Regex Pattern complied to test for user input
      */
-        private final Pattern PATTERN = Pattern.compile("(\\w+) (\\w+), (\\d+)");
+        private final Pattern PATTERN = Pattern.compile("(\\w+) +(\\w+), +(\\d+)");
         /**
          * inputFetching method
          * prints instructions and examples to the terminal
