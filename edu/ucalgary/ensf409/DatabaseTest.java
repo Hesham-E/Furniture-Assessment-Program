@@ -109,7 +109,7 @@ public class DatabaseTest
         test.removeFurniture("chair", "C0914");
 
         Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/INVENTORY", "scm", "ensf409");
-        PreparedStatement statment = connect.prepareStatement("SELECT * FROM chair WHERE ID = 'C0914'");
+        PreparedStatement statment = connect.prepareStatement("SELECT * FROM CHAIR WHERE ID = 'C0914'");
 
         assertFalse("Delete operation unsuccessful", statment.executeQuery().next());
         statment.close();
